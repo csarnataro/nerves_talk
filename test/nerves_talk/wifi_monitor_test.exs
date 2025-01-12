@@ -1,9 +1,9 @@
-defmodule NervesLivebook.WiFiMonitorTest do
+defmodule NervesTalk.WiFiMonitorTest do
   use ExUnit.Case, async: false
 
   import ExUnit.CaptureLog
 
-  alias NervesLivebook.WiFiMonitor
+  alias NervesTalk.WiFiMonitor
 
   @presence_prop ["interface", "wlan0", "present"]
   @connection_prop ["interface", "wlan0", "connection"]

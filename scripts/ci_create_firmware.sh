@@ -16,14 +16,14 @@ set -e
 [[ -d "$DEPLOY_PATH" ]] || (echo "DEPLOY_PATH unset or directory doesn't exist"; exit 1)
 [[ -n "$MIX_ENV" ]] || MIX_ENV=prod
 
-FULL_FIRMWARE_FILENAME="nerves_livebook_${MIX_TARGET}.fw"
+FULL_FIRMWARE_FILENAME="nerves_talk_${MIX_TARGET}.fw"
 FULL_FIRMWARE_PATH="$DEPLOY_PATH/$FULL_FIRMWARE_FILENAME"
 PREVIOUS_FIRMWARE_FILENAME="previous_${MIX_TARGET}.fw"
-PREVIOUS_FIRMWARE_URL=https://github.com/nerves-livebook/nerves_livebook/releases/latest/download/nerves_livebook_${MIX_TARGET}.fw
+PREVIOUS_FIRMWARE_URL=https://github.com/nerves-livebook/nerves_talk/releases/latest/download/nerves_talk_${MIX_TARGET}.fw
 SCRIPT_DIR=$(dirname "${BASH_SOURCE[0]}")
 
 # Copy the firmware out of the build directory
-cp "_build/${MIX_TARGET}_${MIX_ENV}/nerves/images/nerves_livebook.fw" "$FULL_FIRMWARE_PATH"
+cp "_build/${MIX_TARGET}_${MIX_ENV}/nerves/images/nerves_talk.fw" "$FULL_FIRMWARE_PATH"
 
 # Sign the firmware image if there was a key
 if [[ -n "$FW_SIGNING_KEY" ]]; then

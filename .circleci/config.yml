@@ -66,7 +66,7 @@ host_build: &host_build
     - run:
         name: Create SBOM
         command: |
-          mix sbom.cyclonedx -f -o nerves_livebook_sbom.xml
+          mix sbom.cyclonedx -f -o nerves_talk_sbom.xml
     - run:
         name: Create artifacts dir
         command: mkdir -p ~/deploy/artifacts
@@ -74,7 +74,7 @@ host_build: &host_build
         name: Copy changelog and SBOM
         command: |
           cp ./CHANGELOG.md ~/deploy/CHANGELOG.md
-          cp ./nerves_livebook_sbom.xml ~/deploy/nerves_livebook_sbom.xml
+          cp ./nerves_talk_sbom.xml ~/deploy/nerves_talk_sbom.xml
     - run:
         name: Dialyzer
         command: mix dialyzer
@@ -116,8 +116,8 @@ build: &build
     - run:
         name: Compress and copy over the raw image
         command: |
-          zip nerves_livebook_${MIX_TARGET}.zip nerves_livebook.img
-          cp nerves_livebook_${MIX_TARGET}.zip ~/deploy/artifacts
+          zip nerves_talk_${MIX_TARGET}.zip nerves_talk.img
+          cp nerves_talk_${MIX_TARGET}.zip ~/deploy/artifacts
     - run:
         name: Create full and delta firmware images
         command: |
@@ -158,8 +158,8 @@ build_grisp2: &build_grisp2
         name: Create full and delta firmware images
         command: |
           DEPLOY_PATH=~/deploy/artifacts ./scripts/ci_create_firmware.sh
-          gzip -k nerves_livebook.img
-          cp nerves_livebook.img.gz ~/deploy/artifacts/nerves_livebook_${MIX_TARGET}.img.gz
+          gzip -k nerves_talk.img
+          cp nerves_talk.img.gz ~/deploy/artifacts/nerves_talk_${MIX_TARGET}.img.gz
     - store_artifacts:
         path: ~/deploy
         destination: images

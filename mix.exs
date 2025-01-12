@@ -1,9 +1,9 @@
-defmodule NervesLivebook.MixProject do
+defmodule NervesTalk.MixProject do
   use Mix.Project
 
-  @app :nerves_livebook
+  @app :nerves_talk
   @version "0.14.1"
-  @source_url "https://github.com/nerves-livebook/nerves_livebook"
+  @source_url "https://github.com/nerves-livebook/nerves_talk"
 
   @rpi_targets [:rpi, :rpi0, :rpi2, :rpi3, :rpi3a, :rpi4, :rpi0_2, :rpi5]
   @all_targets @rpi_targets ++
@@ -21,7 +21,7 @@ defmodule NervesLivebook.MixProject do
     [
       app: @app,
       description: "Develop on embedded devices with Livebook and Nerves",
-      author: "https://github.com/nerves-livebook/nerves_livebook/graphs/contributors",
+      author: "https://github.com/nerves-livebook/nerves_talk/graphs/contributors",
       version: @version,
       package: package(),
       elixir: "~> 1.17",
@@ -42,13 +42,13 @@ defmodule NervesLivebook.MixProject do
 
   def application do
     [
-      mod: {NervesLivebook.Application, []},
+      mod: {NervesTalk.Application, []},
       extra_applications: [:logger, :runtime_tools, :inets, :ex_unit]
     ]
   end
 
   # The nice part about posting to hex is that documentation links work when you're
-  # calling NervesLivebook functions.
+  # calling NervesTalk functions.
   defp package do
     %{
       files: [

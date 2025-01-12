@@ -12,7 +12,7 @@ Evaluate the following to see what firmware version you're running:
 
 ```elixir
 IO.write("""
-You're running Nerves Livebook #{NervesLivebook.version()}.
+You're running Nerves Livebook #{NervesTalk.version()}.
 
 More details:
 Target: #{Nerves.Runtime.mix_target()}
@@ -24,11 +24,11 @@ Firmware partition: #{Nerves.Runtime.KV.get("nerves_fw_active")}
 Let's query GitHub to see what the penultimate release is:
 
 ```elixir
-NervesLivebook.check_internet!()
+NervesTalk.check_internet!()
 
 # Setup for below
-alias NervesLivebook.GithubRelease
-repo = "nerves-livebook/nerves_livebook"
+alias NervesTalk.GithubRelease
+repo = "nerves-livebook/nerves_talk"
 firmware_path = "/data/update.fw"
 firmware_public_key = "IyCnjyE1rrV+W5HFrovC+ZyxrBh9fF7Na4S+7dcGAPw="
 
@@ -43,7 +43,7 @@ working.
 
 ```elixir
 {:ok, firmware_url} =
-  GithubRelease.firmware_url(release, "nerves_livebook_#{NervesLivebook.target()}.fw")
+  GithubRelease.firmware_url(release, "nerves_talk_#{NervesTalk.target()}.fw")
 
 IO.puts("Downloading #{firmware_url} to #{firmware_path}...")
 
@@ -62,5 +62,5 @@ successfully, your device will reboot.
 # Check signatures if firmware_public_key is specified
 extra_fwup_arguments = if firmware_public_key, do: ["--public-key", firmware_public_key], else: []
 
-NervesLivebook.Fwup.upgrade(firmware_path, extra_fwup_arguments)
+NervesTalk.Fwup.upgrade(firmware_path, extra_fwup_arguments)
 ```

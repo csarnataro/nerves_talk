@@ -1,4 +1,4 @@
-defmodule NervesLivebook.Fwup do
+defmodule NervesTalk.Fwup do
   @doc """
   Upgrades the system with the specified firmware update file
   """

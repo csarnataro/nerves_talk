@@ -1,4 +1,4 @@
-defmodule NervesLivebook do
+defmodule NervesTalk do
   @moduledoc """
   Nerves Livebook firmware
   """
@@ -12,7 +12,7 @@ defmodule NervesLivebook do
   """
   @spec version() :: String.t()
   def version() do
-    Application.spec(:nerves_livebook, :vsn)
+    Application.spec(:nerves_talk, :vsn)
     |> to_string()
   end
 
@@ -39,7 +39,7 @@ defmodule NervesLivebook do
 
   def ssh_show_prompt(_peer, _username, _service) do
     msg = """
-    https://github.com/nerves-livebook/nerves_livebook
+    https://github.com/nerves-livebook/nerves_talk
 
     ssh #{Node.self()} # Use password "nerves"
     """

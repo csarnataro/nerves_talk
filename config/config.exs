@@ -71,7 +71,7 @@ config :livebook, :runtime_modules, [Livebook.Runtime.Embedded, Livebook.Runtime
 
 # Forward the package search trough a custom handler to only show local ones.
 config :livebook, Livebook.Runtime.Embedded,
-  load_packages: {NervesLivebook.Dependencies, :packages, []}
+  load_packages: {NervesTalk.Dependencies, :packages, []}
 
 # Allow Livebook to power off  the device
 config :livebook, :shutdown_callback, {Process, :spawn, [Nerves.Runtime, :poweroff, [], []]}
@@ -91,7 +91,7 @@ config :livebook,
   teams_auth?: false,
   teams_url: "https://teams.livebook.dev",
   github_release_info: %{
-    repo: "nerves-livebook/nerves_livebook",
+    repo: "nerves-livebook/nerves_talk",
     version: Mix.Project.config()[:version]
   },
   update_instructions_url: nil,

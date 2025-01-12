@@ -301,25 +301,25 @@ Here are a few screenshots of what it should look like:
 
 Note how it has picked up on the advertising data.
 
-![scanning-for-devices](https://github.com/nerves-livebook/nerves_livebook/raw/main/assets/ble/device-scan.png)
+![scanning-for-devices](https://github.com/nerves-livebook/nerves_talk/raw/main/assets/ble/device-scan.png)
 
 ### Connected
 
 When you click connect, the app connects to your Peripheral, and performs service discovery.
 It finds the GAP service and the custom firmware config service.
 
-![connected](https://github.com/nerves-livebook/nerves_livebook/raw/main/assets/ble/device-connected.png)
+![connected](https://github.com/nerves-livebook/nerves_talk/raw/main/assets/ble/device-connected.png)
 
 ### The GAP service
 
 If you click the GAP service, you can click the down button to perform read requests -
 they will hit the `read/1` functions you implemented above.
 
-![gap-service](https://github.com/nerves-livebook/nerves_livebook/raw/main/assets/ble/device-gap-services.png)
+![gap-service](https://github.com/nerves-livebook/nerves_talk/raw/main/assets/ble/device-gap-services.png)
 
 ### The firmware configuration service
 
 Try it out! Use the up arrow to send a write request. If you write to the last attribute,
 the device should reboot.
 
-![firmware-service](https://github.com/nerves-livebook/nerves_livebook/raw/main/assets/ble/device-firmware-config-service.png)
+![firmware-service](https://github.com/nerves-livebook/nerves_talk/raw/main/assets/ble/device-firmware-config-service.png)

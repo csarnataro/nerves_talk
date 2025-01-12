@@ -1,6 +1,6 @@
-defmodule NervesLivebook.MixInstallTest do
+defmodule NervesTalk.MixInstallTest do
   use ExUnit.Case
-  alias NervesLivebook.MixInstall
+  alias NervesTalk.MixInstall
 
   test "already installed dependencies" do
     assert :ok == MixInstall.install([:kino, {:vega_lite, "~> 0.1.0"}], [])

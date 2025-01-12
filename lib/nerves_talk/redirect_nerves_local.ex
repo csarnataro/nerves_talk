@@ -1,4 +1,4 @@
-defmodule NervesLivebook.RedirectNervesLocal do
+defmodule NervesTalk.RedirectNervesLocal do
   @moduledoc false
 
   @behaviour Plug

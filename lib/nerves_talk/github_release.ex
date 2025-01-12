@@ -1,6 +1,6 @@
-defmodule NervesLivebook.GithubRelease do
+defmodule NervesTalk.GithubRelease do
   @moduledoc """
-  Check for firmware updates from the Github releases of the NervesLivebook
+  Check for firmware updates from the Github releases of the NervesTalk
   repo. See `firmware_update.livemd` for usage.
   """
 
@@ -86,6 +86,6 @@ defmodule NervesLivebook.GithubRelease do
   end
 
   defp user_agent() do
-    ~c"NervesLivebook/#{NervesLivebook.version()}"
+    ~c"NervesTalk/#{NervesTalk.version()}"
   end
 end

@@ -6,7 +6,7 @@ Nerves comes with a tool for handling firmware updates called
 [fwup](https://github.com/fwup-home/fwup). It allows for archival and
 application of firmware updates, however it does not handle distribution of
 updates.  This Livebook comes with a module that can fetch a firmware update
-from [Github releases](https://github.com/nerves-livebook/nerves_livebook/releases).
+from [Github releases](https://github.com/nerves-livebook/nerves_talk/releases).
 
 ## Walk through
 
@@ -14,7 +14,7 @@ Evaluate the following to see what firmware version you're running:
 
 ```elixir
 IO.write("""
-You're running Nerves Livebook #{NervesLivebook.version()}.
+You're running Nerves Livebook #{NervesTalk.version()}.
 
 More details:
 Target: #{Nerves.Runtime.mix_target()}
@@ -24,15 +24,15 @@ Firmware partition: #{Nerves.Runtime.KV.get("nerves_fw_active")}
 ```
 
 Nerves Livebook firmware images are hosted on GitHub under the [releases
-tab](https://github.com/nerves-livebook/nerves_livebook/releases). Let's query GitHub
+tab](https://github.com/nerves-livebook/nerves_talk/releases). Let's query GitHub
 to see what the latest release is:
 
 ```elixir
-NervesLivebook.check_internet!()
+NervesTalk.check_internet!()
 
 # Setup for below
-alias NervesLivebook.GithubRelease
-repo = "nerves-livebook/nerves_livebook"
+alias NervesTalk.GithubRelease
+repo = "nerves-livebook/nerves_talk"
 firmware_path = "/data/update.fw"
 firmware_public_key = "IyCnjyE1rrV+W5HFrovC+ZyxrBh9fF7Na4S+7dcGAPw="
 
@@ -49,7 +49,7 @@ on a slow connection. Watch the evaluating circle pulse to know that it's workin
 
 ```elixir
 {:ok, firmware_url} =
-  GithubRelease.firmware_url(latest, "nerves_livebook_#{Nerves.Runtime.mix_target()}.fw")
+  GithubRelease.firmware_url(latest, "nerves_talk_#{Nerves.Runtime.mix_target()}.fw")
 
 IO.puts("Downloading #{firmware_url} to #{firmware_path}...")
 
@@ -87,7 +87,7 @@ settings. It just updates the Nerves Livebook firmware. After this completes
 successfully, your device will reboot.
 
 ```elixir
-NervesLivebook.Fwup.upgrade(firmware_path, extra_fwup_arguments)
+NervesTalk.Fwup.upgrade(firmware_path, extra_fwup_arguments)
 ```
 
 ## Notes
@@ -114,7 +114,7 @@ To replicate this, do the following:
 ### SSH firmware updates
 
 If you've cloned the
-[`nerves_livebook`](https://github.com/nerves-livebook/nerves_livebook/) repository
+[`nerves_talk`](https://github.com/nerves-livebook/nerves_talk/) repository
 and are building your own version of it, it's going to be easier to update your
 device via SSH. The firmware signatures aren't checked on SSH updates, so you
 can do what you want. 🚀
@@ -122,21 +122,21 @@ can do what you want. 🚀
 Here's the script:
 
 ```sh
-cd nerves_livebook
+cd nerves_talk
 export MIX_TARGET=rpi0
 mix deps.get
 mix firmware
 mix firmware.gen.script
 ./upload.sh livebook@nerves.local
-Path: ./_build/rpi0_dev/nerves/images/nerves_livebook.fw
-Product: nerves_livebook 0.2.4
+Path: ./_build/rpi0_dev/nerves/images/nerves_talk.fw
+Product: nerves_talk 0.2.4
 UUID: 0989e4e1-55e4-51ca-ba39-5c677cc7395c
 Platform: rpi0
 
 Uploading to livebook@nerves.local...
 Warning: Permanently added 'nerves.local,172.31.112.97' (RSA) to the list of known hosts.
 Nerves Livebook
-https://github.com/nerves-livebook/nerves_livebook
+https://github.com/nerves-livebook/nerves_talk
 
 ssh livebook@nerves.local # Use password "nerves"
 

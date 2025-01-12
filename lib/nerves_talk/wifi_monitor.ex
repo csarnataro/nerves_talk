@@ -1,4 +1,4 @@
-defmodule NervesLivebook.WiFiMonitor do
+defmodule NervesTalk.WiFiMonitor do
   @moduledoc """
   Monitor WiFi on startup to determine if AP mode needs to be enabled
 
@@ -34,7 +34,7 @@ defmodule NervesLivebook.WiFiMonitor do
     state = %{
       timeout:
         opts[:timeout] ||
-          Application.get_env(:nerves_livebook, :wifi_monitor_timeout, @default_timeout),
+          Application.get_env(:nerves_talk, :wifi_monitor_timeout, @default_timeout),
       test_fn: opts[:test_fn]
     }
 

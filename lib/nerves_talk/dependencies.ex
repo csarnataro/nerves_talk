@@ -1,4 +1,4 @@
-defmodule NervesLivebook.Dependencies do
+defmodule NervesTalk.Dependencies do
   @moduledoc false
 
   # List of apps that are provided by default by Erlang and Elixir
@@ -18,7 +18,7 @@ defmodule NervesLivebook.Dependencies do
     :logger,
     :mnesia,
     :mix,
-    :nerves_livebook,
+    :nerves_talk,
     :observer,
     :odbc,
     :os_mon,

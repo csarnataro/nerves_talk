@@ -1,4 +1,4 @@
-defmodule NervesLivebook.UI do
+defmodule NervesTalk.UI do
   @moduledoc """
   Provide a simple UI using the device's built-in LEDs
 

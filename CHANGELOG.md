@@ -142,7 +142,7 @@ NOTE: `:tflite_elixir` is temporily removed due to build errors.
 
 * Updates
   * Generate and post docs to hex.pm so that hyperlinks work when calling
-    NervesLivebook functions
+    NervesTalk functions
   * Update Nerves systems to nerves_system_br 1.22.3 versions. This includes
     Erlang 25.2.3 and an update for Rust support. Libraries using Rust aren't
     included yet due to an issue on 32-bit platforms, but will likely be
@@ -404,7 +404,7 @@ to notebooks there.
 ## v0.2.21
 
 * Updates
-  * Update all URLs to point to the `nerves_livebook` home on the `livebook-dev`
+  * Update all URLs to point to the `nerves_talk` home on the `livebook-dev`
     GitHub repository
 
 ## v0.2.20

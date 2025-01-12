@@ -1,4 +1,4 @@
-defmodule NervesLivebook.Application do
+defmodule NervesTalk.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
@@ -13,11 +13,11 @@ defmodule NervesLivebook.Application do
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: NervesLivebook.Supervisor]
+    opts = [strategy: :one_for_one, name: NervesTalk.Supervisor]
 
     children =
       [
-        NervesLivebook.UI
+        NervesTalk.UI
       ] ++ target_children(Nerves.Runtime.mix_target())
 
     Supervisor.start_link(children, opts)
@@ -25,7 +25,7 @@ defmodule NervesLivebook.Application do
 
   defp initialize_data_directory() do
     destination_dir = "/data/livebook"
-    source_dir = Application.app_dir(:nerves_livebook, "priv")
+    source_dir = Application.app_dir(:nerves_talk, "priv")
 
     # Best effort create everything
     _ = File.mkdir_p(destination_dir)
@@ -82,7 +82,7 @@ defmodule NervesLivebook.Application do
         Code.eval_string("""
         defmodule Mix do
           def install(deps, opts \\\\ []) when is_list(deps) and is_list(opts) do
-            NervesLivebook.MixInstall.install(deps, opts)
+            NervesTalk.MixInstall.install(deps, opts)
           end
         end
         """)
@@ -96,7 +96,7 @@ defmodule NervesLivebook.Application do
   if Mix.target() == :host do
     defp target_children(_), do: []
   else
-    defp target_children(:srhub), do: [NervesLivebook.WiFiMonitor]
+    defp target_children(:srhub), do: [NervesTalk.WiFiMonitor]
     defp target_children(_), do: []
   end
 end

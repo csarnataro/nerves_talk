@@ -1,6 +1,6 @@
-defmodule NervesLivebook.DependenciesTest do
+defmodule NervesTalk.DependenciesTest do
   use ExUnit.Case, async: true
-  alias NervesLivebook.Dependencies
+  alias NervesTalk.Dependencies
 
   defp all_package_names() do
     for %{name: name} <- Dependencies.packages(), do: name
@@ -36,9 +36,9 @@ defmodule NervesLivebook.DependenciesTest do
     refute "crypto" in names
   end
 
-  test "does not return nerves_livebook" do
+  test "does not return nerves_talk" do
     names = all_package_names()
-    refute "nerves_livebook" in names
+    refute "nerves_talk" in names
   end
 
   test "version numbers all parse" do

@@ -25,7 +25,7 @@ config :livebook,
 
 # Configure plugs
 config :livebook,
-  plugs: [{NervesLivebook.RedirectNervesLocal, []}]
+  plugs: [{NervesTalk.RedirectNervesLocal, []}]
 
 # Modify to update the password on device
 # config :livebook,
@@ -34,7 +34,7 @@ config :livebook,
 # Set the Erlang distribution cookie
 config :livebook,
   node: :"livebook@#{hostname}.local",
-  cookie: :nerves_livebook_cookie
+  cookie: :nerves_talk_cookie
 
 # Endpoint configuration
 port = if mix_target == :host, do: 8080, else: 80

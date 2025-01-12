@@ -5,7 +5,7 @@ IMPORTANT: This won't work unless your device has Internet access.
 What's the weather like today?
 
 ```elixir
-NervesLivebook.check_internet!()
+NervesTalk.check_internet!()
 
 use Toolshed
 weather()

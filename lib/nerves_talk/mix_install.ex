@@ -1,4 +1,4 @@
-defmodule NervesLivebook.MixInstall do
+defmodule NervesTalk.MixInstall do
   @moduledoc """
   Simulate Mix.install for Nerves Livebook
 
@@ -52,7 +52,7 @@ defmodule NervesLivebook.MixInstall do
         Mix.install/2 is not supported on Nerves Livebook (yet!).
 
         All is not lost, but you will have to rebuild the Nerves Livebook firmware.
-        Go to https://github.com/nerves-livebook/nerves_livebook and clone the repository.
+        Go to https://github.com/nerves-livebook/nerves_talk and clone the repository.
         Add #{inspect(app)} to the dependencies listed in the `mix.exs` file, build,
         and then try again.
         """
