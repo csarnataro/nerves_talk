@@ -17,9 +17,9 @@ defmodule UiWeb.Router do
   scope "/", UiWeb do
     pipe_through(:browser)
 
-    get("/slides", PageController, :home)
+    get("/", SlidesController, :home)
 
-    live("/", PageLive, :index)
+    live("/home", PageLive, :index)
 
     live("/users", UserLive.Index, :index)
     live("/users/new", UserLive.Index, :new)

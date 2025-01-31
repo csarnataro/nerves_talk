@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<.live_title default="NervesTalk" suffix=" · Phoenix Framework">
+		{assigns[:page_title]}
+		</.live_title>
+
+		<link rel="stylesheet" href="/assets/vendor/reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="/assets/vendor/reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="/assets/vendor/reveal.js/dist/theme/white.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<!-- link rel="stylesheet" href="/assets/vendor/reveal.js/plugin/highlight/monokai.css" -->
+		<link rel="stylesheet" href="/assets/vendor/highlight.js/styles/a11y-light.css" -->
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-markdown data-separator-vertical="^--vertical--">
+					<textarea data-template>
+						{@inner_content}
+					</textarea>
+				</section>
+			</div>
+		</div>
+
+		<script src="/assets/vendor/reveal.js/dist/reveal.js"></script>
+		<script src="/assets/vendor/reveal.js/plugin/notes/notes.js"></script>
+		<script src="/assets/vendor/reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="/assets/vendor/reveal.js/plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
