@@ -29,7 +29,11 @@ erl_crash.dump
 ui-*.tar
 
 # Ignore assets that are produced by build tools.
-/priv/static/assets/
+priv/static/assets/
+
+!priv/static/assets/vendor/reveal.js/
+!priv/static/assets/vendor/highlight.js/
+
 
 # Ignore digested assets cache.
 /priv/static/cache_manifest.json
@@ -41,4 +45,6 @@ npm-debug.log
 # Database files
 *.db
 *.db-*
+
+.direnv/
 

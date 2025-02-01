@@ -40,7 +40,7 @@
         # elixir = pkgs-beam.elixir;
 
         # use latest version of Elixir 1.17
-        elixir = pkgs-beam.elixir_1_18;
+        elixir = pkgs-beam.elixir_1_17;
 
         # specify exact version of Elixir
         # elixir = pkgs-beam.elixir.override {
