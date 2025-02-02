@@ -1,7 +1,7 @@
 defmodule UiWeb.SlidesController do
   use UiWeb, :controller
 
-  plug :put_view, __MODULE__.View
+  plug(:put_view, __MODULE__.View)
 
   def home(conn, _params) do
     slides = read_slide_files()
@@ -20,17 +20,12 @@ defmodule UiWeb.SlidesController do
   end
 
   defp read_slide_files() do
-      Path.join([:code.priv_dir(:ui), "data", "slides"])
-      |> Path.join("*.md")
-      |> Path.wildcard()
-      |> Enum.sort(&(get_order(&1) < get_order(&2)))
-      |> Enum.map(&File.read!/1)
-      |> Enum.join("\n\n---\n\n")
-
-    # |> Enum.map(&Path.basename/1)
-
-    # files = Path.wildcard(Path.join(slides_dir, "*.md"))
-    # Application.app_dir(:my_app, "priv/data/slides") # does the same with a tad less complexity.
+    Path.join([:code.priv_dir(:ui), "data", "slides"])
+    |> Path.join("*.md")
+    |> Path.wildcard()
+    |> Enum.sort(&(get_order(&1) < get_order(&2)))
+    |> Enum.map(&File.read!/1)
+    |> Enum.join("\n\n---\n\n")
   end
 
   defmodule View do
@@ -38,7 +33,7 @@ defmodule UiWeb.SlidesController do
 
     def deck(assigns) do
       ~H"""
-      {assigns.slides}
+      <%= assigns.slides %>
       """
     end
   end

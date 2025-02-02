@@ -4,17 +4,18 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<.live_title default="NervesTalk" suffix=" · Phoenix Framework">
-		{assigns[:page_title]}
+		<.live_title suffix=" · Slides">
+		<%= assigns[:page_title] || "Nerves Talk" %>
 		</.live_title>
 
-		<link rel="stylesheet" href="/assets/vendor/reveal.js/dist/reset.css">
-		<link rel="stylesheet" href="/assets/vendor/reveal.js/dist/reveal.css">
-		<link rel="stylesheet" href="/assets/vendor/reveal.js/dist/theme/white.css">
+
+		<link rel="stylesheet" href="/js/reveal.js/reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="/js/reveal.js/reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="/js/reveal.js/reveal.js/dist/theme/white.css">
 
 		<!-- Theme used for syntax highlighted code -->
-		<!-- link rel="stylesheet" href="/assets/vendor/reveal.js/plugin/highlight/monokai.css" -->
-		<link rel="stylesheet" href="/assets/vendor/highlight.js/styles/a11y-light.css" -->
+		<!-- link rel="stylesheet" href="/js/reveal.js/reveal.js/plugin/highlight/monokai.css" -->
+		<link rel="stylesheet" href="/js/reveal.js/highlight.js/styles/a11y-light.css" -->
 
 	</head>
 	<body>
@@ -22,16 +23,16 @@
 			<div class="slides">
 				<section data-markdown data-separator-vertical="^--vertical--">
 					<textarea data-template>
-						{@inner_content}
+						<%= @inner_content %>
 					</textarea>
 				</section>
 			</div>
 		</div>
 
-		<script src="/assets/vendor/reveal.js/dist/reveal.js"></script>
-		<script src="/assets/vendor/reveal.js/plugin/notes/notes.js"></script>
-		<script src="/assets/vendor/reveal.js/plugin/markdown/markdown.js"></script>
-		<script src="/assets/vendor/reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="/js/reveal.js/reveal.js/dist/reveal.js"></script>
+		<script src="/js/reveal.js/reveal.js/plugin/notes/notes.js"></script>
+		<script src="/js/reveal.js/reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="/js/reveal.js/reveal.js/plugin/highlight/highlight.js"></script>
 		<script>
 			// More info about initialization & config:
 			// - https://revealjs.com/initialization/

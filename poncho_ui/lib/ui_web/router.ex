@@ -1,6 +1,32 @@
 defmodule UiWeb.Router do
   use UiWeb, :router
 
+  pipeline :reveal_static do
+    plug(Plug.Static,
+      at: "/js/reveal.js/",
+      from: {:ui, "priv/revealjs_assets/reveal.js/"},
+      gzip: false
+    )
+  end
+
+  scope "/js/reveal.js/", UiWeb do
+    pipe_through(:reveal_static)
+    get("/*not_found", PageController, :not_found)
+  end
+
+  pipeline :markdown_static do
+    plug(Plug.Static,
+      at: "/slides/images/",
+      from: {:ui, "priv/data/slides/images/"},
+      gzip: false
+    )
+  end
+
+  scope "/slides/images/", UiWeb do
+    pipe_through(:markdown_static)
+    get("/*not_found", PageController, :not_found)
+  end
+
   pipeline :browser do
     plug(:accepts, ["html"])
     plug(:fetch_session)
