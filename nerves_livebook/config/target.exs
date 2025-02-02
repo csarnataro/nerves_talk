@@ -1,8 +1,10 @@
 import Config
 
+{:ok, hostname} = :inet.gethostname()
+
 config :ui, UiWeb.Endpoint,
-  url: [host: "csarnataro.local"],
-  http: [port: 8080],
+  url: [host: "#{hostname}.local"],
+  http: [port: 4000],
   cache_static_manifest: "priv/static/cache_manifest.json",
   secret_key_base: "HEY05EB1dFVSu6KykKHuS4rQPQzSHv4F7mGVB/gnDLrIu75wE/ytBXy2TaL3A6RA",
   live_view: [signing_salt: "AAAABjEyERMkxgDh"],
