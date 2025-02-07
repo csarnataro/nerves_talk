@@ -1,7 +1,7 @@
-defmodule UiWeb.UserLive.Show do
+defmodule UiWeb.SlideLive.Show do
   use UiWeb, :live_view
 
-  alias Ui.Accounts
+  alias Ui.Slides
 
   @impl true
   def mount(_params, _session, socket) do
@@ -13,9 +13,9 @@ defmodule UiWeb.UserLive.Show do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:user, Accounts.get_user!(id))}
+     |> assign(:slide, Slides.get_slide!(id))}
   end
 
-  defp page_title(:show), do: "Show User"
-  defp page_title(:edit), do: "Edit User"
+  defp page_title(:show), do: "Show Slide"
+  defp page_title(:edit), do: "Edit Slide"
 end

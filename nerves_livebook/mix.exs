@@ -77,7 +77,7 @@ defmodule NervesLivebook.MixProject do
       {:livebook, "~> 0.14.0"},
       {:plug, "~> 1.12"},
       {:vintage_net, "~> 0.13"},
-      {:ui, path: "../poncho_ui", env: Mix.env()},
+      {:ui, path: "../ui", env: Mix.env()},
 
       # Pull in commonly used libraries as a convenience to users.
       {:blue_heron, "~> 0.5", targets: @ble_targets},

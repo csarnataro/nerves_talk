@@ -47,18 +47,20 @@ defmodule UiWeb.Router do
 
     live("/home", PageLive, :index)
 
-    live("/users", UserLive.Index, :index)
-    live("/users/new", UserLive.Index, :new)
-    live("/users/:id/edit", UserLive.Index, :edit)
+    live("/slides", SlideLive.Index, :index)
+    live("/slides/new", SlideLive.Index, :new)
+    live("/slides/:id/edit", SlideLive.Index, :edit)
 
-    live("/users/:id", UserLive.Show, :show)
-    live("/users/:id/show/edit", UserLive.Show, :edit)
+    live("/slides/:id", SlideLive.Show, :show)
+    live("/slides/:id/show/edit", SlideLive.Show, :edit)
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", UiWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", UiWeb do
+    pipe_through(:api)
+
+    get("/", SlidesController, :as_json)
+  end
 
   # Enable LiveDashboard in development
   if Application.compile_env(:ui, :dev_routes) do

@@ -1,10 +1,24 @@
 defmodule UiWeb.SlidesController do
   use UiWeb, :controller
 
+  alias Ui.Slides
+  alias Ui.Slides.Slide
+
   plug(:put_view, __MODULE__.View)
 
+  def as_json(conn, _params) do
+    slides =
+      read_slides_from_db()
+
+    json(conn, %{slides: slides})
+  end
+
   def home(conn, _params) do
-    slides = read_slide_files()
+    #  slides = read_slide_files()
+    slides =
+      read_slides_from_db()
+      |> Enum.map(& &1.content)
+      |> Enum.join("\n\n---\n\n")
 
     conn
     |> put_layout(html: false)
@@ -17,6 +31,11 @@ defmodule UiWeb.SlidesController do
       :error -> 0
       {value, _} -> value
     end
+  end
+
+  defp read_slides_from_db() do
+    Slides.list_slides()
+    |> Enum.map(&%{content: &1.content})
   end
 
   defp read_slide_files() do
