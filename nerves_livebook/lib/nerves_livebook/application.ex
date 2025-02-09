@@ -18,6 +18,7 @@ defmodule NervesLivebook.Application do
     children =
       [
         NervesLivebook.UI,
+        {Task, &Ui.MigrationHelpers.migrate/0},
         UiWeb.Endpoint
       ] ++ target_children(Nerves.Runtime.mix_target())
 

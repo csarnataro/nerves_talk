@@ -32,6 +32,7 @@ defmodule Ui.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:ring_logger, "~> 0.9"},
       {:phoenix, "~> 1.7.8"},
       {:phoenix_live_view, "~> 1.0.0-rc.0"},
       {:phoenix_html, "~> 4.0"},

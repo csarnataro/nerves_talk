@@ -13,7 +13,7 @@ config :ui,
 # Configures the endpoint
 config :ui, UiWeb.Endpoint,
   url: [host: "localhost"],
-  render_errors: [view: UiWeb.ErrorView, accepts: ~w(html json), layout: false],
+  render_errors: [view: UiWeb.ErrorHTML, accepts: ~w(html json), layout: false],
   pubsub_server: Ui.PubSub,
   live_view: [signing_salt: "4jVC64mw"]
 
@@ -43,6 +43,8 @@ config :tailwind,
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
+
+config :logger, backends: [RingLogger]
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason

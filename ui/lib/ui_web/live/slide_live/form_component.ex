@@ -8,7 +8,7 @@ defmodule UiWeb.SlideLive.FormComponent do
     ~H"""
     <div>
       <.header>
-        {@title}
+        <%= @title %>
         <:subtitle>Use this form to manage slide records in your database.</:subtitle>
       </.header>
 
