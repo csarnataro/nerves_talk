@@ -26,4 +26,4 @@ config :ui, Ui.Repo,
   pool_size: 5,
   show_sensitive_data_on_connection_error: true
 
-import_config "../../poncho_ui/config/config.exs"
+import_config "../../ui/config/config.exs"

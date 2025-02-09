@@ -11,7 +11,7 @@ config :ui, UiWeb.Endpoint,
   check_origin: false,
   # Start the server since we're running in a release instead of through `mix`
   server: true,
-  render_errors: [view: UiWeb.ErrorView, accepts: ~w(html json), layout: false],
+  render_errors: [view: UiWeb.ErrorHTML, accepts: ~w(html json), layout: false],
   pubsub_server: Ui.PubSub,
   # Nerves root filesystem is read-only, so disable the code reloader
   code_reloader: false
