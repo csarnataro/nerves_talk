@@ -33,8 +33,8 @@ defmodule Ui.MixProject do
   defp deps do
     [
       {:ring_logger, "~> 0.9"},
-      {:phoenix, "~> 1.7.8"},
-      {:phoenix_live_view, "~> 1.0.0-rc.0"},
+      {:phoenix, "1.7.14"},
+      {:phoenix_live_view, "~> 1.0.0-rc.6"},
       {:phoenix_html, "~> 4.0"},
       {:phoenix_live_dashboard, "~> 0.8.4-rc.0"},
       {:phoenix_ecto, "~> 4.4"},

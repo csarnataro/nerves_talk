@@ -1,5 +1,5 @@
 <.header>
-  Slide {@slide.id}
+  Slide <%= @slide.id %>
   <:subtitle>This is a slide record from your database.</:subtitle>
   <:actions>
     <.link patch={~p"/slides/#{@slide}/show/edit"} phx-click={JS.push_focus()}>
@@ -9,8 +9,8 @@
 </.header>
 
 <.list>
-  <:item title="Order">{@slide.order}</:item>
-  <:item title="Content">{@slide.content}</:item>
+  <:item title="Order"><%= @slide.order %></:item>
+  <:item title="Content"><%= @slide.content %></:item>
 </.list>
 
 <.back navigate={~p"/slides"}>Back to slides</.back>

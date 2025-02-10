@@ -2,14 +2,16 @@ defmodule Ui.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
-
   use Application
 
   @impl true
   def start(_type, _args) do
+    # :ok = Ui.MigrationHelpers.migrate()
+
     children = [
       # UiWeb.Telemetry,
       Ui.Repo,
+      {Task, &Ui.MigrationHelpers.migrate/0},
       {DNSCluster, query: Application.get_env(:ui, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Ui.PubSub},
       # Start a worker by calling: Ui.Worker.start_link(arg)
