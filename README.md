@@ -15,10 +15,14 @@ MIX_TARGET=rpi4 sudo -E mix firmware
 MIX_TARGET=rpi4 sudo -E mix firmware.burn
 
 
-# Build
+### Build
 MIX_TARGET=rpi4 sudo -E mix do deps.get, firmware
 
+### Upload
+MIX_TARGET=rpi4 ./upload.sh nerves.local
 
+
+### Slides management
 http://nerves.local:4000/slides
 
 
