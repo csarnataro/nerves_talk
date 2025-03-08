@@ -24,7 +24,7 @@ defmodule NervesLivebook.MixProject do
       author: "https://github.com/nerves-livebook/nerves_livebook/graphs/contributors",
       version: @version,
       package: package(),
-      elixir: "1.17.3",
+      elixir: "1.18.2",
       archives: [nerves_bootstrap: "~> 1.10"],
       start_permanent: Mix.env() == :prod,
       deps: deps(),
