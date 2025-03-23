@@ -1,0 +1,96 @@
+# Temperature sensor demo
+
+## Introduction
+
+We will see how to read the environment temperature via a TMP36 sensor
+connected to a Raspberry Pi 4 using Nerves.
+
+A time series chart will show how temperature varied during the demo.
+
+**Let's get started**
+
+
+## Our equipment
+
+- Raspberry Pi 4: single board computer with up to 8 GB RAM, a 1.5 GHz Quad-core ARM        
+    Cortex-A72 processor, several ports and 40 General Purpose Input/Output (GPIO) pins.
+
+    It operates at 3.3V.
+
+    ![Raspberry Pi 4](./rpi4.jpg)
+
+- TMP36: A low voltage, precision centigrade temperature sensor. 
+    It provides a voltage output that is linearly proportional to the Celsius temperature. 
+
+    ![TMP36](./tmp36.jpg)
+
+- Adafruit ADS1115: 16-Bit Analog to Digital Converter (ADC) - 4 Channel
+
+    ![ADS1115](./ads1115.jpg)
+
+## Hardware schematic
+
+![Schema](./schema.jpg)
+
+## Start reading temperature
+
+Let's start reading the temperature with Elixir
+
+```elixir
+{:ok, ref} = Circuits.I2C.open("i2c-1")
+addr = 72 # default address
+
+# :ain0 is the analog input channel no. 1 on ADC
+{:ok, reading} = ADS1115.read(ref, addr, {:ain0, :gnd})
+```
+
+This value is a bit odd!
+
+From a quick check on the TMP36 documentation, it turns out that it can read 
+temperatures from −40°C to +125°C
+
+
+_Experiments_
+
+```elixir
+
+{:ok, ref} = Circuits.I2C.open("i2c-1")
+addr = 0x48 # default address for ADS1115
+{:ok, reading} = ADS1115.read(ref, addr, {:ain0, :gnd})
+
+IO.puts(reading)
+
+# 1 bit = 3mV
+voltage = reading * 2.048 # 2.048 is the gain
+voltage = voltage / :math.pow(2, 15)
+IO.puts(voltage)
+
+temp = (voltage - 0.5) * 100
+IO.puts("Formula 1 #{temp}")
+
+
+
+IO.puts("Formula 2")
+
+voltage = reading * 3.3
+voltage = voltage / :math.pow(2, 10)
+IO.puts(voltage)
+
+temp = (voltage - 0.5) * 100
+IO.puts("Formula 1 #{temp}")
+ 
+```
+
+
+## References
+
+- https://embedded-elixir.com/post/2019-05-18-talking-i2c/
+- https://hexdocs.pm/ads1115/readme.html
+- https://esphome.io/components/sensor/ads1115.html
+
+
+```elixir
+led_pin = 20
+```
+
+

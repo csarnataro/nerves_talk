@@ -1,0 +1,22 @@
+* Titolo
+Introduzione a Nerves: Elixir in sistemi embedded
+
+* Descrizione
+
+Il linguaggio Elixir e l'Erlang virtual machine (BEAM) sono utilizzati tradizionalmente per lo sviluppo di applicazioni distribuite, scalabili e fault tolerant in ambito "enterprise".
+
+Grazie a Nerves è possibile sfuttare i meccanismi di concorrenza, supervision e immutabilità della BEAM e l'eleganza del paradigma funzionale e dinamico di Elixir in applicazioni embedded e IoT.
+
+In questo talk presenterò un'introduzione a Nerves e alcune demo su Raspberry Pi.
+
+
+* Speaker
+Christian Sarnataro, senior software engineer.
+
+Dal 2021 lavoro come sviluppatore per Arduino, azienda che progetta, produce e supporta dispositivi elettronici e software open source.
+
+In precedenza ho lavorato come sviluppatore frontend, backend e mobile per varie realtà internazionali, tra cui Paramount e varie aziende di consulenza e software house.
+
+Sono laureato in Informatica presso la Statale di Milano.
+
+https://www.linkedin.com/in/sarnataro/
