@@ -45,14 +45,21 @@ config :livebook, :learn_notebooks, [
     # By default the slug is inferred from file name, so there is no need to set it
     slug: "temperature",
     # Optional list of images
-    # image_paths: [
-    #  # This image can be sourced as images/myimage.jpg in the notebook
-    #  "/path/to/myimage.jpg"
-    # ],
+    image_paths: [
+      "#{File.cwd!()}/priv/demo/ads1115.jpg",
+      "#{File.cwd!()}/priv/demo/elixir-milano.png",
+      "#{File.cwd!()}/priv/demo/rpi4.jpg",
+      "#{File.cwd!()}/priv/demo/schema.jpg",
+      "#{File.cwd!()}/priv/demo/tmp36-chart.png",
+      "#{File.cwd!()}/priv/demo/tmp36.jpg"
+
+      #  # This image can be sourced as images/myimage.jpg in the notebook
+      #  "/path/to/myimage.jpg"
+    ],
     # Optional details for the notebook card. If omitted, the notebook
     # is hidden in the UI, but still accessible under /learn/notebooks/{slug}
     details: %{
-      cover_path: "#{File.cwd!()}/priv/demo/elixir-milano.png",
+      cover_path: "#{File.cwd!()}/assets/elixir-milano.png",
       description: "Temperature demo for Elixir Milan Meetup."
     }
   },

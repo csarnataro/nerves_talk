@@ -5,7 +5,7 @@
 We will see how to read the environment temperature via a TMP36 sensor
 connected to a Raspberry Pi 4 using Nerves.
 
-A time series chart will show how temperature varied during the demo.
+A time series chart will show how the temperature changes during the demo.
 
 **Let's get started**
 
@@ -17,20 +17,20 @@ A time series chart will show how temperature varied during the demo.
 
     It operates at 3.3V.
 
-    ![Raspberry Pi 4](./rpi4.jpg)
+    ![Raspberry Pi 4](images/rpi4.jpg)
 
 - TMP36: A low voltage, precision centigrade temperature sensor. 
     It provides a voltage output that is linearly proportional to the Celsius temperature. 
 
-    ![TMP36](./tmp36.jpg)
+    ![TMP36](images/tmp36.jpg)
 
 - Adafruit ADS1115: 16-Bit Analog to Digital Converter (ADC) - 4 Channel
 
-    ![ADS1115](./ads1115.jpg)
+    ![ADS1115](images/ads1115.jpg)
 
 ## Hardware schematic
 
-![Schema](./schema.jpg)
+![Schema](images/schema.jpg)
 
 ## Start reading temperature
 

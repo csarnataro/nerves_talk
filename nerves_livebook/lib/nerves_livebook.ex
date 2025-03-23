@@ -14,6 +14,7 @@ defmodule NervesLivebook do
   def version() do
     Application.spec(:nerves_livebook, :vsn)
     |> to_string()
+    |> Kernel.<>("\n" <> "ADS1115: " <> ADS1115.version())
   end
 
   @doc """
