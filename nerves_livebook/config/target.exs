@@ -2,24 +2,24 @@ import Config
 
 {:ok, hostname} = :inet.gethostname()
 
-config :ui, UiWeb.Endpoint,
-  url: [host: "#{hostname}.local"],
-  http: [port: 4000],
-  cache_static_manifest: "priv/static/cache_manifest.json",
-  secret_key_base: "HEY05EB1dFVSu6KykKHuS4rQPQzSHv4F7mGVB/gnDLrIu75wE/ytBXy2TaL3A6RA",
-  live_view: [signing_salt: "AAAABjEyERMkxgDh"],
-  check_origin: false,
-  # Start the server since we're running in a release instead of through `mix`
-  server: true,
-  render_errors: [view: UiWeb.ErrorHTML, accepts: ~w(html json), layout: false],
-  pubsub_server: Ui.PubSub,
-  # Nerves root filesystem is read-only, so disable the code reloader
-  code_reloader: false
-
-config :ui, Ui.Repo,
-  database: "/data/ui/ui.db",
-  pool_size: 5,
-  show_sensitive_data_on_connection_error: true
+# config :ui, UiWeb.Endpoint,
+#   url: [host: "#{hostname}.local"],
+#   http: [port: 4000],
+#   cache_static_manifest: "priv/static/cache_manifest.json",
+#   secret_key_base: "HEY05EB1dFVSu6KykKHuS4rQPQzSHv4F7mGVB/gnDLrIu75wE/ytBXy2TaL3A6RA",
+#   live_view: [signing_salt: "AAAABjEyERMkxgDh"],
+#   check_origin: false,
+#   # Start the server since we're running in a release instead of through `mix`
+#   server: true,
+#   render_errors: [view: UiWeb.ErrorHTML, accepts: ~w(html json), layout: false],
+#   pubsub_server: Ui.PubSub,
+#   # Nerves root filesystem is read-only, so disable the code reloader
+#   code_reloader: false
+# 
+# config :ui, Ui.Repo,
+#   database: "/data/ui/ui.db",
+#   pool_size: 5,
+#   show_sensitive_data_on_connection_error: true
 
 # Use shoehorn to start the main application. See the shoehorn
 # docs for separating out critical OTP applications such as those

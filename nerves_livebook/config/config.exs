@@ -21,8 +21,8 @@ end
 
 config :nerves, source_date_epoch: "1603310828"
 
-config :ui,
-  ecto_repos: [Ui.Repo]
+# config :ui,
+#  ecto_repos: [Ui.Repo]
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
