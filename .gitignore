@@ -45,3 +45,4 @@ npm-debug.log
 .direnv/
 
 /tmp/
+.DS_Store
