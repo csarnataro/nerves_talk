@@ -108,15 +108,14 @@ IO.puts("Value provided by the ADC: #{reading}")
 
 # 1 bit = 3mV
 voltage = ((reading * 2.048) / (:math.pow(2, 15) - 1)) 
-IO.puts("Corresponding to voltage: #{voltage}")
+IO.puts("Corresponding to voltage: #{voltage |> Float.ceil(2)} V")
 
 temp = (voltage - 0.5) * 100
-IO.puts("Temperature is: #{temp} °C")
+IO.puts("Temperature is: #{temp |> Float.ceil(2) } °C")
  
 # Same formula with all pre computed calculations
-temp = (reading - 8000) / 160.6 
-IO.puts("Using a pre-computed formula: #{temp} °C")
-
+temp = (reading - 8000) / 160
+IO.puts("Using a pre-computed formula: #{temp |> Float.ceil(2)} °C")
 
 ```
 
@@ -128,8 +127,5 @@ IO.puts("Using a pre-computed formula: #{temp} °C")
 - https://esphome.io/components/sensor/ads1115.html
 
 
-```elixir
-led_pin = 20
-```
 
 
