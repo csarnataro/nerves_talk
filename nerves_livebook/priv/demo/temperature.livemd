@@ -17,20 +17,20 @@ A time series chart will show how the temperature changes during the demo.
 
     It operates at 3.3V.
 
-    ![Raspberry Pi 4](http://www.example.com/images/rpi4.jpg)
-
+    ![Raspberry Pi 4](https://raw.githubusercontent.com/csarnataro/nerves_talk/refs/heads/main/nerves_livebook/priv/demo/rpi4.jpg)
+    
 - TMP36: A low voltage, precision centigrade temperature sensor. 
     It provides a voltage output that is linearly proportional to the Celsius temperature. 
 
-    ![TMP36](http://www.example.com/images/tmp36.jpg)
+    ![TMP36](files/tmp36.jpg)
 
 - Adafruit ADS1115: 16-Bit Analog to Digital Converter (ADC) - 4 Channel
 
-    ![ADS1115](http://www.example.com/images/ads1115.jpg)
+    ![ADS1115](files/ads1115.jpg)
 
 ## Hardware schematic
 
-![Schema](http://www.example.com/images/schema.jpg)
+![Schema](files/schema.jpg)
 
 ## Start reading temperature
 
@@ -38,7 +38,7 @@ Let's start reading the temperature with Elixir
 
 ```elixir
 {:ok, ref} = Circuits.I2C.open("i2c-1")
-addr = 72 # default address
+addr = 0x48 # default address for this device
 
 # :ain0 is the analog input channel no. 1 on ADC
 {:ok, reading} = ADS1115.read(ref, addr, {:ain0, :gnd})
@@ -60,24 +60,15 @@ addr = 0x48 # default address for ADS1115
 
 IO.puts(reading)
 
+
+temp = (reading - 8000) / 160.6 # Formula from Prof. Marzi
+IO.puts("Formula 0 #{temp}")
+
 # 1 bit = 3mV
-voltage = reading * 2.048 # 2.048 is the gain
-voltage = voltage / :math.pow(2, 15)
-IO.puts(voltage)
+voltage = ((reading * 2.048) / :math.pow(2, 15))
 
-temp = (voltage - 0.5) * 100
-IO.puts("Formula 1 #{temp}")
-
-
-
-IO.puts("Formula 2")
-
-voltage = reading * 3.3
-voltage = voltage / :math.pow(2, 10)
-IO.puts(voltage)
-
-temp = (voltage - 0.5) * 100
-IO.puts("Formula 1 #{temp}")
+temp = (((reading * 2.048) / :math.pow(2, 15)) - 0.5) * 100
+IO.puts("Formula 1 #{voltage}V -> #{temp} °C")
  
 ```
 
