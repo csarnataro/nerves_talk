@@ -44,8 +44,9 @@ config :livebook, :learn_notebooks, [
     # Optional notebook identifier for URLs, as in /learn/notebooks/{slug}
     # By default the slug is inferred from file name, so there is no need to set it
     slug: "temperature",
-    # Optional list of images
-    # image_paths: [
+    # Optional list of files
+
+    # file_paths: [
     #   "#{File.cwd!()}/priv/demo/ads1115.jpg",
     #   "#{File.cwd!()}/priv/demo/elixir-milano.png",
     #   "#{File.cwd!()}/priv/demo/rpi4.jpg",
@@ -53,6 +54,7 @@ config :livebook, :learn_notebooks, [
     #   "#{File.cwd!()}/priv/demo/tmp36-chart.png",
     #   "#{File.cwd!()}/priv/demo/tmp36.jpg"
     # ],
+
     # Optional details for the notebook card. If omitted, the notebook
     # is hidden in the UI, but still accessible under /learn/notebooks/{slug}
     details: %{

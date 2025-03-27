@@ -12,45 +12,91 @@ A time series chart will show how the temperature changes during the demo.
 
 ## Our equipment
 
-- Raspberry Pi 4: single board computer with up to 8 GB RAM, a 1.5 GHz Quad-core ARM        
-    Cortex-A72 processor, several ports and 40 General Purpose Input/Output (GPIO) pins.
+### Raspberry Pi 4
+A single board computer with up to 8 GB RAM, a 1.5 GHz Quad-core ARM        
+Cortex-A72 processor, several ports and 40 General Purpose Input/Output (GPIO) pins.
+It can read only digital values, not analogic ones. It operates at 3.3V.
 
-    It operates at 3.3V.
+![Raspberry Pi 4](https://raw.githubusercontent.com/csarnataro/nerves_talk/refs/heads/main/nerves_livebook/priv/demo/rpi4.jpg)
+    
+### TMP36
+A low voltage, precision centigrade temperature sensor. 
+It provides a voltage output that is linearly proportional to the Celsius temperature. 
 
-    ![Raspberry Pi 4](http://www.example.com/images/rpi4.jpg)
+![TMP36](https://raw.githubusercontent.com/csarnataro/nerves_talk/refs/heads/main/nerves_livebook/priv/demo/tmp36.jpg)
 
-- TMP36: A low voltage, precision centigrade temperature sensor. 
-    It provides a voltage output that is linearly proportional to the Celsius temperature. 
+### Adafruit ADS1115
+A 16-Bit Analog to Digital Converter (ADC) - 4 Channel
 
-    ![TMP36](http://www.example.com/images/tmp36.jpg)
-
-- Adafruit ADS1115: 16-Bit Analog to Digital Converter (ADC) - 4 Channel
-
-    ![ADS1115](http://www.example.com/images/ads1115.jpg)
+![ADS1115](https://raw.githubusercontent.com/csarnataro/nerves_talk/refs/heads/main/nerves_livebook/priv/demo/ads1115.jpg)
 
 ## Hardware schematic
 
-![Schema](http://www.example.com/images/schema.jpg)
+![Schema](https://raw.githubusercontent.com/csarnataro/nerves_talk/refs/heads/main/nerves_livebook/priv/demo/schema.jpg)
 
 ## Start reading temperature
 
-Let's start reading the temperature with Elixir
+Let's start reading the temperature with Elixir.
 
 ```elixir
 {:ok, ref} = Circuits.I2C.open("i2c-1")
-addr = 72 # default address
+addr = 0x48 # default address for this device
 
 # :ain0 is the analog input channel no. 1 on ADC
 {:ok, reading} = ADS1115.read(ref, addr, {:ain0, :gnd})
+
+IO.puts("Temperature is #{reading}")
+
 ```
 
-This value is a bit odd!
+Well, this value seems a bit odd!
 
 From a quick check on the TMP36 documentation, it turns out that it can read 
 temperatures from −40°C to +125°C
 
+![TMP 36 datasheet](https://raw.githubusercontent.com/csarnataro/nerves_talk/refs/heads/main/nerves_livebook/priv/demo/tmp36-only-chart.png)
 
-_Experiments_
+Each temperature yields a different voltage output, following the simple linear equation
+
+$$
+V = \dfrac{1}{100} T + 0.5
+$$
+
+where T is the temperature and V is the read voltage.
+
+This means that the given a measured voltage, the corresponding temperature is:
+
+$$ 
+T = (V - 0.5) \cdot 100
+$$
+
+
+Remember though, we cannot read the voltage analog value from the Raspberry PI.
+So we need to ask the ADS115 ADC to convert the voltage into a numeric value.
+
+ADS1115 is a 16 bit ADC, it provides values from -32768 to 32767.
+
+Since we're considering only positive numbers, we're working in the range 0 .. 2<sup>15</sup> - 1 = 32767
+
+The formula to get the voltage is
+
+$$
+V = \dfrac {r \cdot 2,048} {2^{15} - 1}
+$$
+
+where `r` is the value read from the ADC and `2.048` is a coefficient specific for the ADS115 ADC, 
+related to the operating voltage of the board, in this case 3.3V. Other voltages (e.g. 5V) would require 
+a different coefficient.
+
+This means the formula to read the temperature is:
+
+$$
+
+T = \bigg(\Big(\dfrac {r \cdot 2,048} {2^{15} - 1}\Big) - 0.5 \bigg) \cdot 100
+
+$$
+
+Now, let's convert all this maths into Elixir code:
 
 ```elixir
 
@@ -58,27 +104,19 @@ _Experiments_
 addr = 0x48 # default address for ADS1115
 {:ok, reading} = ADS1115.read(ref, addr, {:ain0, :gnd})
 
-IO.puts(reading)
+IO.puts("Value provided by the ADC: #{reading}")
 
 # 1 bit = 3mV
-voltage = reading * 2.048 # 2.048 is the gain
-voltage = voltage / :math.pow(2, 15)
-IO.puts(voltage)
+voltage = ((reading * 2.048) / (:math.pow(2, 15) - 1)) 
+IO.puts("Corresponding to voltage: #{voltage |> Float.ceil(2)} V")
 
 temp = (voltage - 0.5) * 100
-IO.puts("Formula 1 #{temp}")
-
-
-
-IO.puts("Formula 2")
-
-voltage = reading * 3.3
-voltage = voltage / :math.pow(2, 10)
-IO.puts(voltage)
-
-temp = (voltage - 0.5) * 100
-IO.puts("Formula 1 #{temp}")
+IO.puts("Temperature is: #{temp |> Float.ceil(2) } °C")
  
+# Same formula with all pre computed calculations
+temp = (reading - 8000) / 160
+IO.puts("Using a pre-computed formula: #{temp |> Float.ceil(2)} °C")
+
 ```
 
 
@@ -89,8 +127,5 @@ IO.puts("Formula 1 #{temp}")
 - https://esphome.io/components/sensor/ads1115.html
 
 
-```elixir
-led_pin = 20
-```
 
 
