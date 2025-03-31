@@ -14,11 +14,12 @@ defmodule UiWeb.SlidesController do
   end
 
   def home(conn, _params) do
-    #  slides = read_slide_files()
     slides =
       read_slides_from_db()
       |> Enum.map(& &1.content)
       |> Enum.join("\n\n---\n\n")
+
+    slides = read_slide_files()
 
     conn
     |> put_layout(html: false)
