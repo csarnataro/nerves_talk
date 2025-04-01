@@ -1,5 +1,15 @@
 # Temperature sensor demo
 
+```elixir
+Mix.install([
+  {:vega_lite, "~> 0.1.6"},
+  {:kino_vega_lite, "~> 0.1.11"}
+])
+
+alias VegaLite, as: Vl
+
+```
+
 ## Introduction
 
 We will see how to read the environment temperature via a TMP36 sensor
@@ -106,7 +116,6 @@ addr = 0x48 # default address for ADS1115
 
 IO.puts("Value provided by the ADC: #{reading}")
 
-# 1 bit = 3mV
 voltage = ((reading * 2.048) / (:math.pow(2, 15) - 1)) 
 IO.puts("Corresponding to voltage: #{voltage |> Float.ceil(2)} V")
 
@@ -119,6 +128,73 @@ IO.puts("Using a pre-computed formula: #{temp |> Float.ceil(2)} °C")
 
 ```
 
+We now need to plot the temperature on a chart every 2 seconds.
+
+We create a GenServer which will call function `temperature/0` periodically.
+
+```elixir
+  defmodule Periodically do
+    use GenServer
+  
+    def start_link(_opts) do
+      GenServer.start_link(__MODULE__, %{})
+    end
+  
+    def init(_state) do
+      {:ok, ref} = Circuits.I2C.open("i2c-1")
+  
+      chart =
+        Vl.new(width: 600, height: 300)
+        |> Vl.mark(:line)
+        |> Vl.encode_field(:x, "date", type: :temporal)
+        |> Vl.encode_field(:y, "temperature", type: :quantitative, scale: [zero: false])
+        |> Kino.VegaLite.render()
+      
+      initial_state = %{
+        ref: ref,
+        chart: chart
+      } 
+      
+      schedule_work() # Schedule work to be performed at some point
+      {:ok, initial_state}
+    end
+  
+    def handle_info(:work, %{ref: ref, chart: chart}) do
+      
+      temp = temperature(ref)
+      new_point = 
+        %{
+          "date" => DateTime.now!("Europe/Rome") |> DateTime.to_iso8601(),
+          "temperature" => temp
+        }
+      Kino.VegaLite.push(chart, new_point)
+
+      schedule_work() # Reschedule once more
+      {:noreply, %{ref: ref, chart: chart}}
+    end
+  
+    defp schedule_work() do
+      Process.send_after(self(), :work, 2 * 1000)
+    end
+  
+    defp temperature(ref) do
+      addr = 0x48 # default address for ADS1115
+      {:ok, reading} = ADS1115.read(ref, addr, {:ain0, :gnd})
+      
+      voltage = ((reading * 2.048) / (:math.pow(2, 15) - 1)) 
+      
+      temp = (voltage - 0.5) * 100 |> Float.ceil(2)
+      # IO.puts("Temperature is: #{temp |> Float.ceil(2) } °C")
+      temp 
+    end
+  
+  end
+  
+  children = [ Periodically ]
+  
+  Supervisor.start_link(children, strategy: :one_for_one)
+
+```
 
 ## References
 
