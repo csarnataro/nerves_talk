@@ -1578,6 +1578,10 @@ select {
   display: inline;
 }
 
+.hide-line-number .hljs-ln-numbers {
+  display: none;
+}
+
 .hover\:cursor-pointer:hover {
   cursor: pointer;
 }

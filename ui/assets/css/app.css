@@ -25,3 +25,7 @@
 .reveal blockquote p {
     display: inline;
 }
+
+.hide-line-number .hljs-ln-numbers {
+    display: none;
+}
