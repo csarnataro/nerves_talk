@@ -15,11 +15,15 @@ defmodule UiWeb.SlidesController do
 
   def home(conn, _params) do
     slides =
-      read_slides_from_db()
-      |> Enum.map(& &1.content)
-      |> Enum.join("\n\n---\n\n")
+      case Mix.target() do
+        :host ->
+          read_slide_files()
 
-    slides = read_slide_files()
+        _ ->
+          read_slides_from_db()
+          |> Enum.map(& &1.content)
+          |> Enum.join("\n\n---\n\n")
+      end
 
     conn
     |> put_layout(html: false)
@@ -53,7 +57,7 @@ defmodule UiWeb.SlidesController do
 
     def deck(assigns) do
       ~H"""
-      <%= assigns.slides %>
+      {assigns.slides}
       """
     end
   end
