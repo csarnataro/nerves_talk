@@ -1282,6 +1282,11 @@ select {
   padding-right: 1rem;
 }
 
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
 .py-1 {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
@@ -1328,6 +1333,10 @@ select {
   text-align: right;
 }
 
+.font-mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
 .text-\[0\.8125rem\] {
   font-size: 0.8125rem;
 }
@@ -1338,6 +1347,10 @@ select {
 
 .text-\[2rem\] {
   font-size: 2rem;
+}
+
+.text-\[32px\] {
+  font-size: 32px;
 }
 
 .text-base {
@@ -1580,6 +1593,10 @@ select {
 
 .hide-line-number .hljs-ln-numbers {
   display: none;
+}
+
+#slide-modal-container textarea {
+  font-family: monospace;
 }
 
 .hover\:cursor-pointer:hover {

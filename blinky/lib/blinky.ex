@@ -1,6 +1,9 @@
 defmodule Blinky do
   use GenServer
 
+  alias Circuits.GPIO
+  alias Pigpiox.Pwm
+
   @text "SOS"
 
   # dit duration in ms, e.g. 100 ms
@@ -44,7 +47,7 @@ defmodule Blinky do
   end
 
   def init(_state) do
-    {:ok, gpio} = Circuits.GPIO.open(@led_gpio, :output)
+    {:ok, gpio} = GPIO.open(@led_gpio, :output)
 
     morse_encoded_letters =
       @text
@@ -58,15 +61,15 @@ defmodule Blinky do
 
   def handle_info(:dit_up, state) do
     %{gpio: gpio} = state
-    Circuits.GPIO.write(gpio, 1)
-    Pigpiox.Pwm.hardware_pwm(@buzzer_gpio, @buzzer_freq, 500_000)
+    GPIO.write(gpio, 1)
+    Pwm.hardware_pwm(@buzzer_gpio, @buzzer_freq, 500_000)
     {:noreply, state}
   end
 
   def handle_info(:dit_down, state) do
     %{gpio: gpio} = state
-    Circuits.GPIO.write(gpio, 0)
-    Pigpiox.Pwm.hardware_pwm(@buzzer_gpio, 0, 0)
+    GPIO.write(gpio, 0)
+    Pwm.hardware_pwm(@buzzer_gpio, 0, 0)
     {:noreply, state}
   end
 

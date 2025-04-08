@@ -105,4 +105,46 @@ defmodule Ui.Slides do
   def change_slide(%Slide{} = slide, attrs \\ %{}) do
     Slide.changeset(slide, attrs)
   end
+
+  defp get_order(path) do
+    case Path.basename(path) |> Integer.parse() do
+      :error -> 0
+      {value, _} -> value
+    end
+  end
+
+  defp get_index_and_content_from_file(filepath) do
+    index = Path.basename(filepath) |> String.split(".") |> Enum.at(0)
+    {:ok, content} = File.read(filepath)
+
+    %{index: index, content: content}
+  end
+
+  def reset() do
+    Repo.delete_all(Slide)
+    populate()
+  end
+
+  def populate() do
+    path = Application.app_dir(:ui, "priv/repo/migrations")
+    Ecto.Migrator.run(Ui.Repo, path, :up, all: true)
+
+    files =
+      Path.join([:code.priv_dir(:ui), "data", "slides"])
+      |> Path.join("*.md")
+      |> Path.wildcard()
+      |> Enum.sort(&(get_order(&1) < get_order(&2)))
+      |> Enum.map(&get_index_and_content_from_file/1)
+      |> Enum.map(fn file ->
+        %Slide{
+          order: String.to_integer(file.index),
+          content: file.content
+        }
+      end)
+
+    Enum.reduce(files, 0, fn slide, acc ->
+      Ui.Repo.insert!(slide)
+      acc + 1
+    end)
+  end
 end

@@ -20,7 +20,7 @@ defmodule UiWeb.SlideLive.FormComponent do
         phx-submit="save"
       >
         <.input field={@form[:order]} type="number" label="Order" />
-        <.input type="textarea" field={@form[:content]} label="Content" />
+        <.input type="textarea" class="font-mono" field={@form[:content]} label="Content" />
         <:actions>
           <.button phx-disable-with="Saving...">Save Slide</.button>
         </:actions>

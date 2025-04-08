@@ -2,7 +2,7 @@ defmodule UiWeb.SlidesController do
   use UiWeb, :controller
 
   alias Ui.Slides
-  alias Ui.Slides.Slide
+  # alias Ui.Slides.Slide
 
   plug(:put_view, __MODULE__.View)
 
@@ -13,17 +13,24 @@ defmodule UiWeb.SlidesController do
     json(conn, %{slides: slides})
   end
 
+  def reset_db(conn, _params) do
+    Slides.reset()
+    redirect(conn, to: ~p"/")
+  end
+
+  def from_files(conn, _params) do
+    slides = read_slide_files()
+    conn
+    |> put_layout(html: false)
+    |> put_root_layout(html: {UiWeb.Layouts, :slides})
+    |> render(:deck, slides: slides)
+  end
+
   def home(conn, _params) do
     slides =
-      case Mix.target() do
-        :host ->
-          read_slide_files()
-
-        _ ->
-          read_slides_from_db()
-          |> Enum.map(& &1.content)
-          |> Enum.join("\n\n---\n\n")
-      end
+      read_slides_from_db()
+      |> Enum.map(& &1.content)
+      |> Enum.join("\n\n---\n\n")
 
     conn
     |> put_layout(html: false)
@@ -39,6 +46,12 @@ defmodule UiWeb.SlidesController do
   end
 
   defp read_slides_from_db() do
+    try do
+      Slides.list_slides()
+    rescue
+      _e in Exqlite.Error ->
+        Slides.populate()
+    end
     Slides.list_slides()
     |> Enum.map(&%{content: &1.content})
   end

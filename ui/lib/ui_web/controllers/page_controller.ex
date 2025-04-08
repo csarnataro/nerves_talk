@@ -1,4 +1,6 @@
 defmodule UiWeb.PageController do
+  alias Ui.Slides
+  alias Ui.Slides.Slide
   use UiWeb, :controller
 
   def home(conn, _params) do
@@ -12,4 +14,5 @@ defmodule UiWeb.PageController do
     |> put_resp_content_type("text/plain")
     |> send_resp(404, "Not found")
   end
+
 end

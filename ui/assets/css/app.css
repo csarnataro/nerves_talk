@@ -29,3 +29,7 @@
 .hide-line-number .hljs-ln-numbers {
     display: none;
 }
+
+#slide-modal-container textarea {
+    font-family: monospace;
+}

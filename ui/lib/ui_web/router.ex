@@ -44,7 +44,8 @@ defmodule UiWeb.Router do
     pipe_through(:browser)
 
     get("/", SlidesController, :home)
-
+    get("/f", SlidesController, :from_files)
+    get("/reset", SlidesController, :reset_db)
     live("/home", PageLive, :index)
 
     live("/slides", SlideLive.Index, :index)
