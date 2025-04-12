@@ -33,3 +33,7 @@
 #slide-modal-container textarea {
     font-family: monospace;
 }
+
+thead th:empty {
+    display: none;
+}

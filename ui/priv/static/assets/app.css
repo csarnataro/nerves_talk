@@ -1599,6 +1599,10 @@ select {
   font-family: monospace;
 }
 
+thead th:empty {
+  display: none;
+}
+
 .hover\:cursor-pointer:hover {
   cursor: pointer;
 }
