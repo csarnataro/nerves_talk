@@ -5,7 +5,7 @@ defmodule Blinky do
   alias Circuits.GPIO
   alias Pigpiox.Pwm
 
-  @text "SOS"
+  @text "ENEA"
 
   # dit duration in ms, e.g. 100 ms
   @dit 100
@@ -67,7 +67,7 @@ defmodule Blinky do
       button_gpio: button_gpio
     }
 
-    # schedule_letter(initial_state)
+    schedule_letter(initial_state)
     {:ok, initial_state}
   end
 

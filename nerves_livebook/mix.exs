@@ -112,6 +112,9 @@ defmodule NervesLivebook.MixProject do
       {:vintage_net_wifi, "~> 0.12.5", targets: @all_targets},
       {:vintage_net_qmi, "~> 0.4.1", targets: @all_targets},
 
+      {:oled, git: "https://github.com/csarnataro/oled.git", tag: "0.3.4"},
+      # {:chisel, "~> 0.2.0"},
+
       # Pull in libraries that start applications, but don't automatically
       # start the applications. See the release definition below.
       {:mndp, "~> 0.1.0", runtime: false, targets: @all_targets},
