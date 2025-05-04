@@ -5,7 +5,7 @@ defmodule Blinky do
   alias Circuits.GPIO
   alias Pigpiox.Pwm
 
-  @text "ENEA"
+  @text "HELLO WORLD"
 
   # dit duration in ms, e.g. 100 ms
   @dit 100

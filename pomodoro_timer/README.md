@@ -11,12 +11,19 @@ export MIX_TARGET=rpi2 && sudo -E env "PATH=$PATH" mix do deps.get, compile, fir
 
 To restart manually the supervisor (for debugging purpose):
 
-```
+```elixir
 Supervisor.stop(PomodoroTimer.Supervisor)
 
 Supervisor.start_link([{PomodoroTimer.FontServer, []}, {PomodoroTimer.OledServer, []}, {PomodoroTimer, []}], [strategy: :one_for_all, name: PomodoroTimer.Supervisor])
 
 
+```
+
+To test the simulated machine PomdoroTimerOnHost:
+```elixir
+    Supervisor.stop(PomodoroTimer.Supervisor)
+    Supervisor.start_link([{PomodoroTimerIO, []}], [strategy: :one_for_all, name: PomodoroTimer.Supervisor])
+    PomodoroTimerIO.push_button
 ```
 
 **TODO: Add description**

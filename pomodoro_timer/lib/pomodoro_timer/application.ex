@@ -28,6 +28,7 @@ defmodule PomodoroTimer.Application do
       #
       # Starts a worker by calling: Host.Worker.start_link(arg)
       # {Host.Worker, arg},
+      {PomodoroTimerIO, []}
     ]
   end
 
@@ -43,6 +44,14 @@ defmodule PomodoroTimer.Application do
   end
 
   def target() do
-    Application.get_env(:pomodoro_timer, :target)
+    try do
+      target = Mix.target()
+      IO.puts("*****************************")
+      IO.inspect(target)
+      IO.puts("*****************************")
+      target
+    rescue
+      _ -> Application.get_env(:pomodoro_timer, :target)
+    end
   end
 end

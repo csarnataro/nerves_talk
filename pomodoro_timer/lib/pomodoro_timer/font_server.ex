@@ -13,7 +13,7 @@ defmodule PomodoroTimer.FontServer do
 
       IO.puts("Initializing font server")
       path = Application.app_dir(:pomodoro_timer, "priv/fonts")
-      Chisel.Font.load(Path.join(path, "5x8.bdf"))
+      Chisel.Font.load(Path.join(path, "clR6x12.bdf"))
 
       # Chisel.Font.load("/etc/simple.bdf")
     end

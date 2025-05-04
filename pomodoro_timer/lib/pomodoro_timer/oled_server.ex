@@ -19,6 +19,7 @@ defmodule PomodoroTimer.OledServer do
   @impl true
   def handle_cast(:clear, state) do
     PomodoroTimer.Display.clear()
+    PomodoroTimer.Display.display()
     {:noreply, state}
   end
 
@@ -55,11 +56,10 @@ defmodule PomodoroTimer.OledServer do
 
     font = FontServer.get()
 
-    PomodoroTimer.Display.fill_rect(0, y, 128, 8)
-    PomodoroTimer.Display.fill_rect(0, y, 128, 8, mode: :xor)
+    PomodoroTimer.Display.fill_rect(0, y, 128, 16)
+    PomodoroTimer.Display.fill_rect(0, y, 128, 16, mode: :xor)
     PomodoroTimer.Display.display()
     
-    Chisel.Renderer.draw_text(" " |> String.duplicate(String.length(text)), x, y, font, put_pixel)
     Chisel.Renderer.draw_text(text, x, y, font, put_pixel)
     update()
   end

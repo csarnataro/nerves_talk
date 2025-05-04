@@ -1,3 +1,13 @@
+# Demos for my "Introduction to Nerves" talk
+
+This repo contains 4 demos I presented at my "Introduction to Nerves" talk
+at the Elixir Language Milan Meetup on May 20th 2005.
+
+1. **Blinky**
+    A  n
+
+
+
 # Livebook + Liveview Nerves project 
 
 Slides and code for the talk held at Milan Elixir Meetup in May 2025.
