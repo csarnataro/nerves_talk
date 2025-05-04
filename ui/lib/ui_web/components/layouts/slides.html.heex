@@ -11,7 +11,7 @@
 
 		<link rel="stylesheet" href="/js/reveal.js/reveal.js/dist/reset.css">
 		<link rel="stylesheet" href="/js/reveal.js/reveal.js/dist/reveal.css">
-		<link rel="stylesheet" href="/js/reveal.js/reveal.js/dist/theme/white.css">
+		<link rel="stylesheet" href="/js/reveal.js/reveal.js/dist/theme/sky.css">
 		<link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
 
 		<!-- Theme used for syntax highlighted code -->
@@ -34,15 +34,27 @@
 		<script src="/js/reveal.js/reveal.js/plugin/notes/notes.js"></script>
 		<script src="/js/reveal.js/reveal.js/plugin/markdown/markdown.js"></script>
 		<script src="/js/reveal.js/reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="/js/reveal.js/animate_plugin.min.js"></script>
+		<script src="/js/reveal.js/loadcontent_plugin.min.js"></script>
+		<script src="/js/reveal.js/svg.min.js"></script>
 		<script>
 			// More info about initialization & config:
 			// - https://revealjs.com/initialization/
 			// - https://revealjs.com/config/
 			Reveal.initialize({
+        animate: {
+          autoplay: true // default is false
+        },  
 				hash: true,
 				slideNumber: true,
 				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+				plugins: [ 
+          RevealMarkdown, 
+          RevealHighlight, 
+          RevealNotes, 
+          RevealLoadContent, 
+          RevealAnimate 
+        ],
 			});
 		</script>
 	</body>
