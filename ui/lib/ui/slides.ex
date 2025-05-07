@@ -23,6 +23,15 @@ defmodule Ui.Slides do
         order_by: [asc: s.order]
       )
     )
+    |> Enum.with_index()
+    |> Enum.map(fn {slide, i} ->
+      %Slide{
+        id: slide.id,
+        order: slide.order,
+        content: slide.content,
+        slide_number: i
+      }
+    end)
   end
 
   @doc """

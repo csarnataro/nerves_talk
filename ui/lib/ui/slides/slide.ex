@@ -5,6 +5,7 @@ defmodule Ui.Slides.Slide do
   schema "slides" do
     field :order, :integer
     field :content, :string
+    field :slide_number, :integer, virtual: true
 
     timestamps()
   end

@@ -6,7 +6,15 @@ defmodule UiWeb.SlideLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, stream(socket, :slides, Slides.list_slides())}
+
+    slides = Slides.list_slides()
+
+    IO.inspect(slides)
+    # slides2 =
+    #   slides
+    #   |> Enum.with_index()
+    #   |> Enum.map(fn {s, i} -> %{:slide => s, :id => i} end)
+    {:ok, stream(socket, :slides, slides)}
   end
 
   @impl true
