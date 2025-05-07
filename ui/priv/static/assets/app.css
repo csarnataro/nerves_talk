@@ -951,10 +951,6 @@ select {
   margin-top: 1rem;
 }
 
-.-mt-4 {
-  margin-top: -1rem;
-}
-
 .block {
   display: block;
 }
@@ -1007,10 +1003,6 @@ select {
   height: 100%;
 }
 
-.h-\[20vh\] {
-  height: 20vh;
-}
-
 .min-h-\[6rem\] {
   min-height: 6rem;
 }
@@ -1025,10 +1017,6 @@ select {
 
 .w-14 {
   width: 3.5rem;
-}
-
-.w-24 {
-  width: 6rem;
 }
 
 .w-3 {
@@ -1053,14 +1041,6 @@ select {
 
 .w-full {
   width: 100%;
-}
-
-.w-\[20vw\] {
-  width: 20vw;
-}
-
-.w-36 {
-  width: 9rem;
 }
 
 .max-w-2xl {
@@ -1240,6 +1220,11 @@ select {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.bg-yellow-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 240 138 / var(--tw-bg-opacity));
+}
+
 .bg-zinc-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(244 244 245 / var(--tw-bg-opacity));
@@ -1252,21 +1237,6 @@ select {
 .bg-zinc-900 {
   --tw-bg-opacity: 1;
   background-color: rgb(24 24 27 / var(--tw-bg-opacity));
-}
-
-.bg-red-50 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(254 242 242 / var(--tw-bg-opacity));
-}
-
-.bg-orange-200 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(254 215 170 / var(--tw-bg-opacity));
-}
-
-.bg-yellow-200 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(254 240 138 / var(--tw-bg-opacity));
 }
 
 .fill-cyan-900 {
@@ -1300,10 +1270,6 @@ select {
 
 .p-4 {
   padding: 1rem;
-}
-
-.p-10 {
-  padding: 2.5rem;
 }
 
 .px-2 {

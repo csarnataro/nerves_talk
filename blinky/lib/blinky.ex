@@ -10,7 +10,6 @@ defmodule Blinky do
   # dit duration in ms, e.g. 100 ms
   @dit 100
   @led_gpio "GPIO21"
-  @button_gpio 16
   @buzzer_gpio 12
   @buzzer_freq 400
 
@@ -51,9 +50,6 @@ defmodule Blinky do
   def init(_state) do
     {:ok, gpio} = GPIO.open(@led_gpio, :output)
 
-    {:ok, button_gpio} = GPIO.open(@button_gpio, :input, pull_mode: :pullup)
-    GPIO.set_interrupts(button_gpio, :both)
-
     morse_encoded_letters =
       @text
       |> String.graphemes()
@@ -61,31 +57,13 @@ defmodule Blinky do
 
     initial_state = %{
       morse_encoded_letters: morse_encoded_letters,
-      gpio: gpio,
       # apparently it must be kept in the state othewise it will be
       # garbage collected
-      button_gpio: button_gpio
+      gpio: gpio,
     }
 
     schedule_letter(initial_state)
     {:ok, initial_state}
-  end
-
-  # interrupt on button
-  def handle_info({:circuits_gpio, @button_gpio, _timestamp, 0}, state) do
-    %{gpio: gpio} = state
-    Logger.info("Button is: [pressed]")
-    GPIO.write(gpio, 1)
-    Pwm.hardware_pwm(@buzzer_gpio, @buzzer_freq, 500_000)
-    {:noreply, state}
-  end
-
-  def handle_info({:circuits_gpio, @button_gpio, _timestamp, 1}, state) do
-    %{gpio: gpio} = state
-    Logger.info("Button is: [NOT pressed]")
-    GPIO.write(gpio, 0)
-    Pwm.hardware_pwm(@buzzer_gpio, 0, 0)
-    {:noreply, state}
   end
 
   def handle_info(:dit_up, state) do
