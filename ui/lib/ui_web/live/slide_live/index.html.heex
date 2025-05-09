@@ -12,6 +12,7 @@
   rows={@streams.slides}
   row_click={fn {_id, slide} -> JS.navigate(~p"/slides/#{slide}") end}
 >
+  <:col :let={{_id, slide}} label="Language"><%= slide.lang %></:col>
   <:col :let={{_id, slide}} label="Order"><%= slide.order %></:col>
   <:col :let={{_id, slide}} label="Content"><%= slide.content %></:col>
   <:action :let={{id, slide}}>

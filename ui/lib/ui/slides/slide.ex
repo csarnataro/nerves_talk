@@ -5,6 +5,7 @@ defmodule Ui.Slides.Slide do
   schema "slides" do
     field :order, :integer
     field :content, :string
+    field :lang, :string
     field :slide_number, :integer, virtual: true
 
     timestamps()
@@ -13,7 +14,7 @@ defmodule Ui.Slides.Slide do
   @doc false
   def changeset(slide, attrs) do
     slide
-    |> cast(attrs, [:order, :content])
-    |> validate_required([:order, :content])
+    |> cast(attrs, [:lang, :order, :content])
+    |> validate_required([:lang, :order, :content])
   end
 end

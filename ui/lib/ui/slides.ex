@@ -17,10 +17,11 @@ defmodule Ui.Slides do
       [%Slide{}, ...]
 
   """
-  def list_slides do
+  def list_slides(lang \\ "it") do
     Repo.all(
       from(s in Slide,
-        order_by: [asc: s.order]
+        where: s.lang == ^lang,
+        order_by: [asc: s.lang, asc: s.order]
       )
     )
     |> Enum.with_index()
@@ -28,6 +29,7 @@ defmodule Ui.Slides do
       %Slide{
         id: slide.id,
         order: slide.order,
+        lang: slide.lang,
         content: slide.content,
         slide_number: i
       }
@@ -138,22 +140,26 @@ defmodule Ui.Slides do
     path = Application.app_dir(:ui, "priv/repo/migrations")
     Ecto.Migrator.run(Ui.Repo, path, :up, all: true)
 
-    files =
-      Path.join([:code.priv_dir(:ui), "data", "slides"])
-      |> Path.join("*.md")
-      |> Path.wildcard()
-      |> Enum.sort(&(get_order(&1) < get_order(&2)))
-      |> Enum.map(&get_index_and_content_from_file/1)
-      |> Enum.map(fn file ->
-        %Slide{
-          order: String.to_integer(file.index),
-          content: file.content
-        }
-      end)
+    Enum.map(["en", "it"], fn lang ->
+      files =
+        Path.join([:code.priv_dir(:ui), "data", "slides"])
+        |> Path.join(lang)
+        |> Path.join("*.md")
+        |> Path.wildcard()
+        |> Enum.sort(&(get_order(&1) < get_order(&2)))
+        |> Enum.map(&get_index_and_content_from_file/1)
+        |> Enum.map(fn file ->
+          %Slide{
+            order: String.to_integer(file.index),
+            content: file.content,
+            lang: lang
+          }
+        end)
 
-    Enum.reduce(files, 0, fn slide, acc ->
-      Ui.Repo.insert!(slide)
-      acc + 1
+      Enum.reduce(files, 0, fn slide, acc ->
+        Ui.Repo.insert!(slide)
+        acc + 1
+      end)
     end)
   end
 end

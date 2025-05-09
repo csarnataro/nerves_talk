@@ -56,8 +56,9 @@ defmodule UiWeb.SlidesController do
     |> Enum.map(&%{content: &1.content})
   end
 
-  defp read_slide_files() do
+  defp read_slide_files(lang \\ "it") do
     Path.join([:code.priv_dir(:ui), "data", "slides"])
+    |> Path.join(lang)
     |> Path.join("*.md")
     |> Path.wildcard()
     |> Enum.sort(&(get_order(&1) < get_order(&2)))

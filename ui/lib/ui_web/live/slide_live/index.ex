@@ -7,7 +7,7 @@ defmodule UiWeb.SlideLive.Index do
   @impl true
   def mount(_params, _session, socket) do
 
-    slides = Slides.list_slides()
+    slides = Slides.list_slides("it") ++ Slides.list_slides("en")
 
     IO.inspect(slides)
     # slides2 =
