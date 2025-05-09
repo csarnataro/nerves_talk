@@ -6,9 +6,14 @@ defmodule UiWeb.SlidesController do
 
   plug(:put_view, __MODULE__.View)
 
-  def as_json(conn, _params) do
+  @default_language "it"
+  @available_languages ["it", "en"]
+
+  def as_json(conn, params) do
+    lang = get_language(params)
+
     slides =
-      read_slides_from_db()
+      read_slides_from_db(lang)
 
     json(conn, %{slides: slides})
   end
@@ -18,17 +23,21 @@ defmodule UiWeb.SlidesController do
     redirect(conn, to: ~p"/")
   end
 
-  def from_files(conn, _params) do
-    slides = read_slide_files()
+  def from_files(conn, params) do
+    lang = get_language(params)
+    slides = read_slide_files(lang)
+
     conn
     |> put_layout(html: false)
     |> put_root_layout(html: {UiWeb.Layouts, :slides})
     |> render(:deck, slides: slides)
   end
 
-  def home(conn, _params) do
+  def home(conn, params) do
+    lang = get_language(params)
+
     slides =
-      read_slides_from_db()
+      read_slides_from_db(lang)
       |> Enum.map(& &1.content)
       |> Enum.join("\n\n---\n\n")
 
@@ -38,6 +47,16 @@ defmodule UiWeb.SlidesController do
     |> render(:deck, slides: slides)
   end
 
+  defp get_language(params) do
+    %{"lang" => lang} = Map.merge(%{"lang" => @default_language}, params)
+
+    if lang in @available_languages do
+      lang
+    else
+      @default_language
+    end
+  end
+
   defp get_order(path) do
     case Path.basename(path) |> Integer.parse() do
       :error -> 0
@@ -45,18 +64,20 @@ defmodule UiWeb.SlidesController do
     end
   end
 
-  defp read_slides_from_db() do
+  defp read_slides_from_db(lang) do
     try do
-      Slides.list_slides()
+      Slides.list_slides(lang)
+      |> Enum.map(&%{content: &1.content})
     rescue
       _e in Exqlite.Error ->
         Slides.populate()
+
+        Slides.list_slides(lang)
+        |> Enum.map(&%{content: &1.content})
     end
-    Slides.list_slides()
-    |> Enum.map(&%{content: &1.content})
   end
 
-  defp read_slide_files(lang \\ "it") do
+  defp read_slide_files(lang) do
     Path.join([:code.priv_dir(:ui), "data", "slides"])
     |> Path.join(lang)
     |> Path.join("*.md")

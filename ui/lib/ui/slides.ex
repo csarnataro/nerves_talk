@@ -18,6 +18,8 @@ defmodule Ui.Slides do
 
   """
   def list_slides(lang \\ "it") do
+
+    IO.inspect("LANG: #{lang}")
     Repo.all(
       from(s in Slide,
         where: s.lang == ^lang,

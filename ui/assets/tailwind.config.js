@@ -10,7 +10,7 @@ module.exports = {
     "./js/**/*.js",
     "../lib/ui_web.ex",
     "../lib/ui_web/**/*.*ex",
-    "../priv/data/slides/*.md",
+    "../priv/data/slides/**/*.md",
   ],
   theme: {
     extend: {
