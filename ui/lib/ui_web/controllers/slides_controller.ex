@@ -10,7 +10,7 @@ defmodule UiWeb.SlidesController do
   @available_languages ["it", "en"]
 
   def as_json(conn, params) do
-    lang = get_language(params)
+    lang = get_language(conn, params)
 
     slides =
       read_slides_from_db(lang)
@@ -24,7 +24,7 @@ defmodule UiWeb.SlidesController do
   end
 
   def from_files(conn, params) do
-    lang = get_language(params)
+    {lang, _conn} = get_language(conn, params)
     slides = read_slide_files(lang)
 
     conn
@@ -34,7 +34,7 @@ defmodule UiWeb.SlidesController do
   end
 
   def home(conn, params) do
-    lang = get_language(params)
+    {lang, conn} = get_language(conn, params)
 
     slides =
       read_slides_from_db(lang)
@@ -47,13 +47,21 @@ defmodule UiWeb.SlidesController do
     |> render(:deck, slides: slides)
   end
 
-  defp get_language(params) do
-    %{"lang" => lang} = Map.merge(%{"lang" => @default_language}, params)
-
+  defp get_language(conn, %{"lang" => lang} = params) when is_map_key(params, "lang") do
     if lang in @available_languages do
-      lang
+      conn = put_resp_cookie(conn, "language", lang, max_age: 10*24*60*60)
+      {lang, conn}
     else
-      @default_language
+      {@default_language, conn}
+    end
+
+  end
+
+  defp get_language(conn, _params) do
+    if conn.cookies["language"] in @available_languages do
+      {conn.cookies["language"], conn}
+    else
+      {@default_language, conn}
     end
   end
 
@@ -78,8 +86,9 @@ defmodule UiWeb.SlidesController do
   end
 
   defp read_slide_files(lang) do
-    Path.join([:code.priv_dir(:ui), "data", "slides"])
-    |> Path.join(lang)
+    IO.inspect(lang)
+    Path.join([:code.priv_dir(:ui), "data", "slides", lang])
+    # |> Path.join(lang)
     |> Path.join("*.md")
     |> Path.wildcard()
     |> Enum.sort(&(get_order(&1) < get_order(&2)))

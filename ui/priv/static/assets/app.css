@@ -873,6 +873,10 @@ select {
   top: 1.5rem;
 }
 
+.bottom-0 {
+  bottom: 0px;
+}
+
 .z-0 {
   z-index: 0;
 }
@@ -1332,6 +1336,30 @@ select {
 
 .pr-6 {
   padding-right: 1.5rem;
+}
+
+.pt-\[50\%\] {
+  padding-top: 50%;
+}
+
+.pt-\[40vh\] {
+  padding-top: 40vh;
+}
+
+.pt-\[20vh\] {
+  padding-top: 20vh;
+}
+
+.pt-\[25vh\] {
+  padding-top: 25vh;
+}
+
+.pt-\[35\%\] {
+  padding-top: 35%;
+}
+
+.pt-\[30\%\] {
+  padding-top: 30%;
 }
 
 .text-left {

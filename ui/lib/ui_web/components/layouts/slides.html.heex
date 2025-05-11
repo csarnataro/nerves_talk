@@ -42,19 +42,20 @@
 			// - https://revealjs.com/initialization/
 			// - https://revealjs.com/config/
 			Reveal.initialize({
-        animate: {
-          autoplay: true // default is false
-        },  
+				pdfSeparateFragments: false,
+				animate: {
+					autoplay: true // default is false
+				},  
 				hash: true,
 				slideNumber: true,
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [ 
-          RevealMarkdown, 
-          RevealHighlight, 
-          RevealNotes, 
-          RevealLoadContent, 
-          RevealAnimate 
-        ],
+					RevealMarkdown, 
+					RevealHighlight, 
+					RevealNotes, 
+					RevealLoadContent, 
+					RevealAnimate 
+				],
 			});
 		</script>
 	</body>
