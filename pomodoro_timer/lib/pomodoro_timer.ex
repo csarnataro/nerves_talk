@@ -20,8 +20,8 @@ defmodule PomodoroTimer do
   @button_gpio 4
 
   @servo_gpio 12
-  @servo_max 2350
-  @servo_min 520
+  @servo_max (2350 + 200)
+  @servo_min (520 - 200)
 
   # apparently this is needed for implementing gen_statem behaviour, not sure why
   def child_spec(args) do
