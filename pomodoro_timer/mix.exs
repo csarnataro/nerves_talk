@@ -72,14 +72,13 @@ defmodule PomodoroTimer.MixProject do
       {:nerves_system_x86_64, "~> 1.24", runtime: false, targets: :x86_64},
       {:nerves_system_grisp2, "~> 0.8", runtime: false, targets: :grisp2},
       {:nerves_system_mangopi_mq_pro, "~> 0.6", runtime: false, targets: :mangopi_mq_pro},
-      
       {:oled, git: "https://github.com/csarnataro/oled.git", tag: "0.3.4"},
       {:chisel, "~> 0.2.0"},
-
       {:circuits_gpio, "~> 2.0 or ~> 1.0"},
       {:circuits_i2c, "~> 2.0 or ~> 1.0"},
       {:circuits_spi, "~> 2.0 or ~> 1.0"},
       {:circuits_uart, "~> 1.3"},
+      {:pigpiox, "~> 0.1.2"}
     ]
   end
 

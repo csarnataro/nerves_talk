@@ -19,6 +19,10 @@ defmodule PomodoroTimer do
 
   @button_gpio 4
 
+  @servo_gpio 12
+  @servo_max 2350
+  @servo_min 520
+
   # apparently this is needed for implementing gen_statem behaviour, not sure why
   def child_spec(args) do
     %{
@@ -63,19 +67,23 @@ defmodule PomodoroTimer do
   end
 
   @impl :gen_statem
-  def callback_mode, do: :state_functions
+  def callback_mode, do: [:state_functions, :state_enter]
 
   @impl :gen_statem
   def init(data) do
-    # write_oled("Starting app with count: #{Map.get(data, :time)}", 10, 3)
-
     {:ok, button_gpio} = GPIO.open(@button_gpio, :input, pull_mode: :pullup)
     GPIO.set_interrupts(button_gpio, :both)
 
     # adding gpio to state, otherwise it will be garbage collected
     data = data |> Map.put(:gpio, button_gpio)
 
+    move_arrow(:idle)
     {:ok, :idle, data, [{:next_event, :internal, :start_the_whole_thing}]}
+  end
+
+  def idle(:enter, _, _) do
+    move_arrow(:idle)
+    :keep_state_and_data
   end
 
   def idle(:internal, :start_the_whole_thing, _data) do
@@ -95,6 +103,11 @@ defmodule PomodoroTimer do
 
   def idle(:info, {:circuits_gpio, @button_gpio, _timestamp, 1}, data) do
     {:next_state, :working, data, [{:next_event, :internal, :push_btn}]}
+  end
+
+  def working(:enter, _, _) do
+    move_arrow(:working)
+    :keep_state_and_data
   end
 
   def working(:internal, :push_btn, data) do
@@ -161,6 +174,21 @@ defmodule PomodoroTimer do
     :keep_state_and_data
   end
 
+  def idle(:enter, _, _) do
+    move_arrow(:short_break)
+    :keep_state_and_data
+  end
+
+  def pause(:enter, _, %{:break_duration => @short_break}) do
+    move_arrow(:short_break)
+    :keep_state_and_data
+  end
+
+  def pause(:enter, _, %{:break_duration => @long_break}) do
+    move_arrow(:long_break)
+    :keep_state_and_data
+  end
+
   def pause(:internal, :start_break, data) do
     clear_screen()
     headline("PAUSE #{data.break_duration} s.")
@@ -179,7 +207,7 @@ defmodule PomodoroTimer do
     actions = [{:timeout, 1000, :one_second}]
     {:keep_state, data, actions}
   end
-  
+
   def pause(:info, {:circuits_gpio, @button_gpio, _timestamp, 0}, _data) do
     :keep_state_and_data
   end
@@ -187,5 +215,21 @@ defmodule PomodoroTimer do
   def pause(:info, {:circuits_gpio, @button_gpio, _timestamp, 1}, data) do
     data = %{data | time: @initial_time, round: @rounds_number, break_duration: @long_break}
     {:next_state, :idle, data, [{:next_event, :internal, :push_btn}]}
+  end
+
+  defp move_arrow(position) do
+    position =
+      case position do
+        :idle -> 1
+        :long_break -> 2
+        :short_break -> 3
+        :working -> 4
+      end
+
+    Pigpiox.Socket.command(
+      :set_servo_pulsewidth,
+      @servo_gpio,
+      trunc(@servo_min + position * ((@servo_max - @servo_min) / 5))
+    )
   end
 end
