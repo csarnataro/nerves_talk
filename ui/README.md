@@ -1,7 +1,7 @@
 # Liveview slides 
 
 Liveview/Phoenix app which serves the slides used in my talk "Introduction to Nerves"
-at the Elixir Language Milan Meetup, on May 20th 2005.
+at the Elixir Language Milan Meetup, on May 20th 2025.
 
 **Warning**: the documentation for this demo is a work-in-progress and, as such, rather incomplete.
 If you need clarifications with any of the steps to build or run the demo, please [create an issue on GitHub](https://github.com/csarnataro/nerves_talk/issues).
