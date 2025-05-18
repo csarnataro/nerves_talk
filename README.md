@@ -1,4 +1,4 @@
-# Demos for my "Introduction to Nerves" talk
+# Demos for the talk "Introduction to Nerves"
 
 This repo contains 5 demos I presented at my talk "Introduction to Nerves"
 at the Elixir Language Milan Meetup, on May 20th 2005.
