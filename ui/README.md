@@ -3,8 +3,8 @@
 Liveview/Phoenix app which serves the slides used in my talk "Introduction to Nerves"
 at the Elixir Language Milan Meetup, on May 20th 2005.
 
-**Warning**: the documentation for this demos is a work-in-progress and, as such, rather incomplete.
-    If you need clarifications with any of the steps to build or run the demos, please [create an issue on GitHub](https://github.com/csarnataro/nerves_talk/issues).
+**Warning**: the documentation for this demo is a work-in-progress and, as such, rather incomplete.
+If you need clarifications with any of the steps to build or run the demo, please [create an issue on GitHub](https://github.com/csarnataro/nerves_talk/issues).
 
 
 You can launch the app locally on your PC or build the app and upload it on a Raspberry Pi.

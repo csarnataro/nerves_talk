@@ -2,8 +2,8 @@
 
 A digital Pomodoro Timer deployed on a Raspberry Pi 2.
 
-**Warning**: the documentation for this demos is a work-in-progress and, as such, rather incomplete.
-    If you need clarifications with any of the steps to build or run the demos, please [create an issue on GitHub](https://github.com/csarnataro/nerves_talk/issues).
+**Warning**: the documentation for this demo is a work-in-progress and, as such, rather incomplete.
+If you need clarifications with any of the steps to build or run the demo, please [create an issue on GitHub](https://github.com/csarnataro/nerves_talk/issues).
 
 
 The logic is implemented using the `:gen_statem` behaviour, where each state of the timer

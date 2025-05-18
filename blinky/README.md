@@ -2,8 +2,8 @@
 
 Inspired by the original "blinky" example available in the [Nerves examples repo](https://github.com/nerves-project/nerves_examples).
 
-**Warning**: the documentation for this demos is a work-in-progress and, as such, rather incomplete.
-    If you need clarifications with any of the steps to build or run the demos, please [create an issue on GitHub](https://github.com/csarnataro/nerves_talk/issues).
+**Warning**: the documentation for this demo is a work-in-progress and, as such, rather incomplete.
+If you need clarifications with any of the steps to build or run the demo, please [create an issue on GitHub](https://github.com/csarnataro/nerves_talk/issues).
 
 
 This version has been improved with an external LED (with its resistor) and a buzzer.

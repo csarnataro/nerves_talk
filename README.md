@@ -5,7 +5,7 @@ at the Elixir Language Milan Meetup, on May 20th 2005.
 
 **Warning**: the documentation for these demos is a work-in-progress and, as such, quite incomplete.
 
-    If you need clarifications with any of the steps to build or run the demos, please [create an issue on GitHub](https://github.com/csarnataro/nerves_talk/issues).
+If you need clarifications with any of the steps to build or run the demos, please [create an issue on GitHub](https://github.com/csarnataro/nerves_talk/issues).
 
 
 1. **Blinky**
