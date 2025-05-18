@@ -1,6 +1,24 @@
-# Nerves Livebook Firmware
+# Nerves Livebook Demo
 
-[![CircleCI](https://circleci.com/gh/nerves-livebook/nerves_livebook.svg?style=svg)](https://circleci.com/gh/nerves-livebook/nerves_livebook)
+A demo built on top of [Livebook with Nerves](https://github.com/nerves-livebook/nerves_livebook).
+
+For this demo I've created a customized firmware with an additional Livebook
+in `/priv/demo/temperature.livemd`.
+
+In the livebook, I wrote a few instructions on how to measure the environmental temperature 
+with a TMP36 sensor.
+
+The measurements coming from the sensor are transmitted to a Raspberry Pi 4
+via a ADS115 analog-to-digital converter.
+
+Finally, the temperatures are displayed in a dynamic VegaLite chart.
+
+## Schematics
+_Coming soon_
+
+***
+
+# Nerves Livebook Firmware
 
 The Nerves Livebook firmware lets you try out the Nerves projects on real
 hardware without needing to build anything. Within minutes, you'll have a
@@ -12,8 +30,7 @@ Looking for a quick demo first? Click below for [Underjord's](https://underjord.
 
 [![Install video](assets/video.jpg)](https://www.youtube.com/watch?v=-b5TPb_MwQE)
 
-## Prerequisites
-
+## Elixir 
 First, you'll need to get some hardware. Nerves Livebook supports the following
 devices:
 

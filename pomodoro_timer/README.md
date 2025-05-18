@@ -1,5 +1,26 @@
 # PomodoroTimer
 
+A digital Pomodoro Timer deployed on a Raspberry Pi 2.
+
+**Warning**: the documentation for this demos is a work-in-progress and, as such, rather incomplete.
+    If you need clarifications with any of the steps to build or run the demos, please [create an issue on GitHub](https://github.com/csarnataro/nerves_talk/issues).
+
+
+The logic is implemented using the `:gen_statem` behaviour, where each state of the timer
+can be either `idle` or `working` or `pause', with different events causing a transition
+from one state to another.
+
+The current state of the timer is shown either on a 0.96" OLED screen and through a servo 
+motor with an arrow mounted on it.
+
+## Schematics
+_Coming soon_
+
+
+
+
+
+
 ## Notes
 
 Upload firmware in just one command with:
@@ -8,25 +29,7 @@ Upload firmware in just one command with:
 export MIX_TARGET=rpi2 && sudo -E env "PATH=$PATH" mix do deps.get, compile, firmware && ./upload.sh nerves.local
 ```
 
-
-To restart manually the supervisor (for debugging purpose):
-
-```elixir
-Supervisor.stop(PomodoroTimer.Supervisor)
-
-Supervisor.start_link([{PomodoroTimer.FontServer, []}, {PomodoroTimer.OledServer, []}, {PomodoroTimer, []}], [strategy: :one_for_all, name: PomodoroTimer.Supervisor])
-
-
-```
-
-To test the simulated machine PomdoroTimerOnHost:
-```elixir
-    Supervisor.stop(PomodoroTimer.Supervisor)
-    Supervisor.start_link([{PomodoroTimerIO, []}], [strategy: :one_for_all, name: PomodoroTimer.Supervisor])
-    PomodoroTimerIO.push_button
-```
-
-**TODO: Add description**
+*** 
 
 ## Targets
 

@@ -1,6 +1,7 @@
 # HelloNerves
 
-**TODO: Add description**
+Simple project created with the Nerves generator at 
+https://github.com/nerves-project/nerves_bootstrap
 
 ## Targets
 

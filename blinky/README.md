@@ -2,6 +2,10 @@
 
 Inspired by the original "blinky" example available in the [Nerves examples repo](https://github.com/nerves-project/nerves_examples).
 
+**Warning**: the documentation for this demos is a work-in-progress and, as such, rather incomplete.
+    If you need clarifications with any of the steps to build or run the demos, please [create an issue on GitHub](https://github.com/csarnataro/nerves_talk/issues).
+
+
 This version has been improved with an external LED (with its resistor) and a buzzer.
 
 In this demo, instead of just blinking the LED indefinitely, the LED turns on and off
@@ -11,14 +15,16 @@ Unlike the original blinky example, the LED is controlled via the `circuits_gpio
 
 The buzzer is controlled via the `pigpiox` library, specifically via the `PWM` module.
 
-***
+## How to build the firmware for a Raspberry Pi 0
 
-[Raspberry Pi Zero](https://www.raspberrypi.com/products/raspberry-pi-zero)
+```sh
+sudo -E env "PATH=$PATH" MIX_TARGET=rpi4 mix do deps.get, compile, firmware.burn
+```
 
-## Hardware
+Then upload the firmware on a SD card, plug it in your Raspberry and restart it. 
 
-
-## Description
+## Schematics
+_Coming soon_
 
 
 ## How to Use the Code in this Repository
