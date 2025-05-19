@@ -116,7 +116,6 @@ defmodule UiWeb.SlidesController do
 
     def deck(assigns) do
       ~H"""
-      # Introduction to Nerves
       <%= assigns.slides %>
       """
     end
