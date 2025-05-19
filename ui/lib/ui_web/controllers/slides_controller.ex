@@ -1,6 +1,7 @@
 defmodule UiWeb.SlidesController do
   use UiWeb, :controller
 
+  require Logger
   alias Ui.Slides
   # alias Ui.Slides.Slide
 
@@ -10,7 +11,7 @@ defmodule UiWeb.SlidesController do
   @available_languages ["it", "en"]
 
   def as_json(conn, params) do
-    lang = get_language(conn, params)
+    {lang, conn} = get_language(conn, params)
 
     slides =
       read_slides_from_db(lang)
@@ -73,15 +74,29 @@ defmodule UiWeb.SlidesController do
   end
 
   defp read_slides_from_db(lang) do
+    Logger.warning("***** TRYING TO READ SLIDES FROM DB *****")
     try do
-      Slides.list_slides(lang)
+      slides = Slides.list_slides(lang)
       |> Enum.map(&%{content: &1.content})
+
+      Logger.warning("***** SLIDES READ FROM DB *****")
+
+      IO.inspect(slides)
+      slides
     rescue
-      _e in Exqlite.Error ->
+
+      e in Exqlite.Error ->
+        Logger.warning("***** ERROR READING FROM DB (Exqlite) *****")
+        IO.inspect(e)
+        Logger.warning(e)
         Slides.populate()
 
         Slides.list_slides(lang)
         |> Enum.map(&%{content: &1.content})
+
+      e ->
+        Logger.warning("***** ERROR READING FROM DB *****")
+        IO.inspect(e)
     end
   end
 
@@ -101,6 +116,7 @@ defmodule UiWeb.SlidesController do
 
     def deck(assigns) do
       ~H"""
+      # Introduction to Nerves
       <%= assigns.slides %>
       """
     end
