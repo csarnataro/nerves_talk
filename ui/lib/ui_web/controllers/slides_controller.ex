@@ -101,7 +101,7 @@ defmodule UiWeb.SlidesController do
 
     def deck(assigns) do
       ~H"""
-      {assigns.slides}
+      <%= assigns.slides %>
       """
     end
   end
