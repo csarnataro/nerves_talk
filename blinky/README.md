@@ -18,7 +18,11 @@ The buzzer is controlled via the `pigpiox` library, specifically via the `PWM` m
 ## How to build the firmware for a Raspberry Pi 0
 
 ```sh
-sudo -E env "PATH=$PATH" MIX_TARGET=rpi4 mix do deps.get, compile, firmware.burn
+export MIX_TARGET=rpi0 && sudo -E env "PATH=$PATH" mix do deps.get, compile, firmware
+```
+
+```sh
+export MIX_TARGET=rpi0 && sudo -E env "PATH=$PATH" mix burn
 ```
 
 Then upload the firmware on a SD card, plug it in your Raspberry and restart it. 
